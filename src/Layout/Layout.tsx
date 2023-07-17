@@ -13,19 +13,19 @@ const Layout = () => {
           <Link to="/films">{Strings.films}</Link>
         </li>
         <li>
-          <Link to="">{Strings.starShips}</Link>
+          <Link to="/starship">{Strings.starShips}</Link>
         </li>
         <li>
-          <Link to="">{Strings.people}</Link>
+          <Link to="/people">{Strings.people}</Link>
         </li>
         <li>
-          <Link to="">{Strings.vehicles}</Link>
+          <Link to="/vehicle">{Strings.vehicles}</Link>
         </li>
         <li>
-          <Link to="">{Strings.species}</Link>
+          <Link to="/species">{Strings.species}</Link>
         </li>
         <li>
-          <Link to="">{Strings.planets}</Link>
+          <Link to="/planets">{Strings.planets}</Link>
         </li>
       </ul>
       <Outlet/>
