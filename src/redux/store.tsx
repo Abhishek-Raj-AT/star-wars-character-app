@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { filmReducer } from "./FilmSlice/FilmSlice";
+import { filmReducer } from "./FilmSlice";
 import { useDispatch } from "react-redux";
 
 export const store = configureStore({

@@ -1,7 +1,7 @@
-import { initialFilmList } from "./FilmType";
+import { FilmList } from "./FilmType";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: initialFilmList = {
+const initialState: FilmList = {
   list: [],
   isLoading: false,
   value: 5,

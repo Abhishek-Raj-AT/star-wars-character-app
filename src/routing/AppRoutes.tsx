@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "../pages/Error/error404";
 import Films from "../pages/Films";
-import Layout from "../Layout/Layout";
+import Layout from "../Layout";
 import Home from "../pages/Home";
 
 const AppRoutes = () => {

@@ -1,4 +1,4 @@
-export interface filmInformation {
+export interface Film {
   name: string;
   height: number;
   mass: number;
@@ -11,8 +11,8 @@ export interface filmInformation {
   films: string[];
   species: string[];
 }
-export interface initialFilmList {
-  list: filmInformation[];
+export interface FilmList {
+  list: Film[];
   isLoading: boolean;
   value: number;
 }

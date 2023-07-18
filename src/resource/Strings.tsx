@@ -6,7 +6,7 @@ export const Strings = {
   vehicles: "Vehicles",
   species: "Species",
   planets: "Planets",
-  we_can_not_find_that_page: "We can not find that page",
+  weCanNotFindThatPage: "We can not find that page",
   returnHome: "Return Home",
   oops: "Oops",
 };

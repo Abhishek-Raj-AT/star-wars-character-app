@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { filmAction } from "../../redux/FilmSlice/FilmSlice";
+import { filmAction } from "../../redux/FilmSlice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
