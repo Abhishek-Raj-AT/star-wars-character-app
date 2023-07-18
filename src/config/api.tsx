@@ -1,11 +1,11 @@
 const api ={
-    starChar: {
+    endPoints: {
         film: "films/",
-        people: "people",
-        planets: "planets",
-        Species: "species",
-        Vehicle: "vehicle",
-        starShip: "starShip",
+        people: "people/",
+        planets: "planets/",
+        Species: "species/",
+        Vehicle: "vehicles/",
+        starShip: "starships/",
     }
 }
 export default api;
