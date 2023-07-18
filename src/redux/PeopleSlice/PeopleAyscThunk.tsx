@@ -1,16 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getFilm } from "../../service/filmService";
+import { getPeople } from "../../service/PeopleService";
 
-interface GetFilmList {
+interface GetPeopleList {
   id: number;
 }
 
-export const getFilmActions = createAsyncThunk(
-  "film/getFilmAction",
-  async (payload: GetFilmList, { dispatch, getState }) => {
+export const getPeopleActions = createAsyncThunk(
+  "people/getPeopleActions",
+  async (payload: GetPeopleList, { dispatch, getState }) => {
     try {
-      const response = await getFilm();
+      const response = await getPeople();
       if (response.status === 200) {
+        console.log("Success response", response.data.results);
         return response?.data?.results;
       } else if (response.status === 401) {
         return response?.data?.message;

@@ -3,7 +3,7 @@ const api ={
         film: "films/",
         people: "people/",
         planets: "planets/",
-        Species: "species/",
+        species: "species/",
         Vehicle: "vehicles/",
         starShip: "starships/",
     }

@@ -2,6 +2,9 @@ import { Link, Outlet, To, useNavigate } from "react-router-dom";
 import { Strings } from "../resource/Strings";
 import { useAppDispatch } from "../redux/store";
 import { getFilmActions } from "../redux/FilmSlice/FilmAyscThunk";
+import { getStarshipActions } from "../redux/StarshipSlice/StarshipAyscThunk";
+import { getPeopleActions } from "../redux/PeopleSlice/PeopleAyscThunk";
+import { getPlanetActions } from "../redux/PlanetsSlice/PlanetAyscThunk";
 
 const Layout = () => {
   const dispatch = useAppDispatch();
@@ -29,10 +32,22 @@ const Layout = () => {
           </Link>
         </li>
         <li>
-          <Link to="/starship">{Strings.starShips}</Link>
+          <Link to="/starship" onClick={()=>
+            {handleTabClick("/starship")
+            dispatch(getStarshipActions({
+              id: 1
+            }))
+          }
+          }>{Strings.starShips}</Link>
         </li>
         <li>
-          <Link to="/people">{Strings.people}</Link>
+          <Link to="/people" onClick={()=>
+            {handleTabClick("/people")
+            dispatch(getPeopleActions({
+              id: 1
+            }))
+          }
+          }>{Strings.people}</Link>
         </li>
         <li>
           <Link to="/vehicle">{Strings.vehicles}</Link>
@@ -41,7 +56,12 @@ const Layout = () => {
           <Link to="/species">{Strings.species}</Link>
         </li>
         <li>
-          <Link to="/planets">{Strings.planets}</Link>
+          <Link to="/planets"
+          onClick={() => {
+            handleTabClick("/");
+            dispatch(getPlanetActions({ id: 1 }));
+          }}
+          >{Strings.planets}</Link>
         </li>
       </ul>
       <Outlet />

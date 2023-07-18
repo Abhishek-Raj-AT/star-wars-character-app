@@ -5,6 +5,7 @@ import { filmAction } from "../../redux/FilmSlice";
 import { Strings } from "../../resource/Strings";
 import './Home.css'
 import { getFilmActions } from "../../redux/FilmSlice/FilmAyscThunk";
+import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAyscThunk";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +37,10 @@ const Home = () => {
         <li>
           {Strings.starShips}
           <div>
-            <Link to="/starship">view</Link>
+            <Link to="/starship"onClick={()=>{
+              handleTabClick("/films")
+              dispatch(getStarshipActions({id: 1}))
+            }}> view</Link>
           </div>
         </li>
       </div>
