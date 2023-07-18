@@ -1,4 +1,4 @@
-export interface filmInformation {
+export interface Film {
  title: string;
  episode_id: number;
  characters: string[];
@@ -13,8 +13,8 @@ export interface filmInformation {
  species: string[];
  planets: string[];
 }
-export interface initialFilmList {
-  list: filmInformation[];
+export interface FilmList {
+  list: Film[];
   isLoading: boolean;
   value: number;
 }

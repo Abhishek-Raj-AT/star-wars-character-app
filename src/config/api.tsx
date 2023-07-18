@@ -1,13 +1,11 @@
 const api ={
-    films: {
-        film: "/films/",
-        filmId: "/films/:id/",
-        filmSchema: "/films/schema/"
-    },
-    starships: {
-        starship: "/starships/",
-        starshipId: "/starships/:id/",
-        starshipSchema: "/starships/schema/"
+    endPoints: {
+        film: "films/",
+        people: "people/",
+        planets: "planets/",
+        Species: "species/",
+        Vehicle: "vehicles/",
+        starShip: "starships/",
     }
 }
 export default api;

@@ -1,7 +1,7 @@
 import { Link, To, useNavigate } from "react-router-dom";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { filmAction } from "../../redux/FilmSlice/FilmSlice";
+import { filmAction } from "../../redux/FilmSlice";
 import { Strings } from "../../resource/Strings";
 import './Home.css'
 import { getFilmActions } from "../../redux/FilmSlice/FilmAyscThunk";
