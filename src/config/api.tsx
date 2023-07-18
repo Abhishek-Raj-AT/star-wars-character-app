@@ -1,11 +1,13 @@
 const api ={
-    starChar: {
+    films: {
         film: "/films/",
-        people: "/people",
-        planets: "/planets",
-        Species: "/species",
-        Vehicle: "/vehicle",
-        starShip: "/starShip",
+        filmId: "/films/:id/",
+        filmSchema: "/films/schema/"
+    },
+    starships: {
+        starship: "/starships/",
+        starshipId: "/starships/:id/",
+        starshipSchema: "/starships/schema/"
     }
 }
 export default api;

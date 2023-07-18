@@ -1,15 +1,17 @@
 export interface filmInformation {
-  name: string;
-  height: number;
-  mass: number;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-  films: string[];
-  species: string[];
+ title: string;
+ episode_id: number;
+ characters: string[];
+ created: string;
+ director: string;
+ edited: string;
+ opening_crawl: string
+ producer: string;
+ release_date: string;
+ url: string;
+ starships: string[];
+ species: string[];
+ planets: string[];
 }
 export interface initialFilmList {
   list: filmInformation[];

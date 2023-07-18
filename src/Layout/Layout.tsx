@@ -1,16 +1,32 @@
-
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, To, useNavigate } from "react-router-dom";
 import { Strings } from "../resource/Strings";
+import { useAppDispatch } from "../redux/store";
+import { getFilmActions } from "../redux/FilmSlice/FilmAyscThunk";
 
 const Layout = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleTabClick = (path: To) => {
+    navigate(path);
+  };
   return (
     <>
-      <ul style={{display:"flex", listStyle: "none", gap: "30px"}}>
+      <ul style={{ display: "flex", listStyle: "none", gap: "30px" }}>
         <li>
-          <Link to="">{Strings.home}</Link>
+          <Link to="/" onClick={() => handleTabClick("/")}>
+            {Strings.home}
+          </Link>
         </li>
         <li>
-          <Link to="/films">{Strings.films}</Link>
+          <Link
+            to="/films"
+            onClick={() => {
+              handleTabClick("/");
+              dispatch(getFilmActions({ id: 1 }));
+            }}
+          >
+            {Strings.films}
+          </Link>
         </li>
         <li>
           <Link to="/starship">{Strings.starShips}</Link>
@@ -28,7 +44,7 @@ const Layout = () => {
           <Link to="/planets">{Strings.planets}</Link>
         </li>
       </ul>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };
