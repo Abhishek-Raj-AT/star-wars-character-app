@@ -1,10 +1,19 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
+import { getVehicleActions } from "../../redux/VehicleSlice/VehicleAyscThnk";
+import { useEffect } from "react";
 
 const Vehicle = () => {
+  const dispatch = useAppDispatch()
   const vehicleList = useSelector(
     (state: IRootState) => state.vehicleStateData.list
   );
+  const loading = useSelector((state:IRootState)=>state.vehicleStateData.isLoading)
+  useEffect(()=>{
+    dispatch(getVehicleActions({
+      id: 1
+    }))
+  },[dispatch])
   return (
     <>
       {vehicleList.map((vehicle, id) => {

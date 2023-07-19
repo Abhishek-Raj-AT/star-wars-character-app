@@ -1,15 +1,22 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
+import { useEffect } from "react";
+import { getPlanetActions } from "../../redux/PlanetsSlice/PlanetAyscThunk";
 
 const Planets = () => {
   const planetList = useSelector(
     (state: IRootState) => state.planetStateData.list
-  );
+  );const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(getPlanetActions({
+      id: 0
+    }))
+  },[dispatch])
   return (
     <div>
       {planetList.map((planet, id) => {
         return (
-          <div>
+          <div key={id}>
             <ul>
               <p>
                 <h4>name:</h4>

@@ -1,15 +1,23 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
+import { useEffect } from "react";
+import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAyscThunk";
 
 const StarShips = () => {
+  const dispatch = useAppDispatch()
   const starShipList = useSelector(
     (state: IRootState) => state.starShipStateData.list
   );
+  useEffect(()=>{
+    dispatch(getStarshipActions({
+      id: 1
+    }))
+  },[dispatch])
   return (
     <div>
-      {starShipList.map((starShips) => {
+      {starShipList.map((starShips,id) => {
         return (
-          <ul>
+          <ul key={id}>
             <p>{starShips.name}</p>
             <p>{starShips.model}</p>
             <p>{starShips.starship_class}</p>

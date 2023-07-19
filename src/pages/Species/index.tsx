@@ -1,10 +1,18 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
+import { useEffect } from "react";
+import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAyscThunk";
 
 const Species = () => {
   const speciesList = useSelector(
     (state: IRootState) => state.speciesStateData.list
   );
+  const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(getSpeciesActions({
+      id: 0
+    }))
+  },[dispatch])
   return (
     <>
       {speciesList.map((species, id) => {

@@ -1,15 +1,23 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
+import { useEffect } from "react";
+import { getPeopleActions } from "../../redux/PeopleSlice/PeopleAyscThunk";
 
 const People = () => {
   const peopleList = useSelector(
     (state: IRootState) => state.peopleStateData.list
   );
+  const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(getPeopleActions({
+      id: 0
+    }))
+  },[dispatch])
   return (
     <>
       {peopleList.map((person, id) => {
         return (
-          <ul>
+          <ul key={id}>
             <p> name:{person.name}</p>
             <p> height:{person.height}</p>
             <p> Hair Color:{person.hair_color}</p>
