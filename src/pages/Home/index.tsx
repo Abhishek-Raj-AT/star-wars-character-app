@@ -1,35 +1,16 @@
-import { Link, To, useNavigate } from "react-router-dom";
-import { IRootState, useAppDispatch } from "../../redux/store";
-import { useSelector } from "react-redux";
-import { filmAction } from "../../redux/FilmSlice";
+import { Link } from "react-router-dom";
 import { Strings } from "../../resource/Strings";
-import './Home.css'
-import { getFilmActions } from "../../redux/FilmSlice/FilmAyscThunk";
-import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAyscThunk";
+import "./Home.css";
 
 const Home = () => {
-  const dispatch = useAppDispatch();
-  const Navigate = useNavigate()
-  const value = useSelector((state: IRootState) => state.filmStateData.value);
-  const handleTabClick =(path: To)=>{
-    Navigate(path)
-  }
-  const increment = () => {
-    dispatch(filmAction.increaseItems(2));
-  };
   return (
-    <div style={{ textAlign: "left", marginLeft: "60px", display: "flex"}}>
+    <div style={{ textAlign: "left", marginLeft: "60px", display: "flex" }}>
       <div className="listStyle">
         <li>
-        {Strings.films}
+          {Strings.films}
           <div>
-            <Link to="/films" onClick={()=>{
-              handleTabClick("/films")
-              dispatch(getFilmActions({id: 1}))
-            }}>view</Link>
-            <button onClick={increment}>+</button>
+            <Link to="/films">view</Link>
             <br />
-            <h1>{value}</h1>
           </div>
         </li>
       </div>
@@ -37,10 +18,7 @@ const Home = () => {
         <li>
           {Strings.starShips}
           <div>
-            <Link to="/starship"onClick={()=>{
-              handleTabClick("/films")
-              dispatch(getStarshipActions({id: 1}))
-            }}> view</Link>
+            <Link to="/starship"> view</Link>
           </div>
         </li>
       </div>

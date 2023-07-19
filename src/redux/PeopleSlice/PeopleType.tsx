@@ -11,7 +11,7 @@ export interface Peoples {
   films: string[];
   species: string[];
 }
-export interface PeoplesList{
-    list: Peoples[]
-    isLoading: boolean
+export interface PeoplesList {
+  list: Peoples[];
+  isLoading: boolean;
 }

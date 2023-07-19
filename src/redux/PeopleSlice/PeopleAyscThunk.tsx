@@ -12,7 +12,6 @@ export const getPeopleActions = createAsyncThunk(
     try {
       const response = await getPeople();
       if (response.status === 200) {
-        console.log("Success response", response.data.results);
         return response?.data?.results;
       } else if (response.status === 401) {
         return response?.data?.message;

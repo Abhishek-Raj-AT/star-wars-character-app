@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getPlanet } from "../../service/PlanetService";
 import { getStarship } from "../../service/StarshipService";
 
 interface GetStarshipList {
@@ -12,7 +11,6 @@ export const getStarshipActions = createAsyncThunk(
     try {
       const response = await getStarship();
       if (response.status === 200) {
-        console.log("Success response", response.data.results);
         return response?.data?.results;
       } else if (response.status === 401) {
         return response?.data?.message;

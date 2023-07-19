@@ -15,22 +15,22 @@ const FilmSlice = createSlice({
       state.value *= action.payload;
     },
   },
-  extraReducers: (builder)=>{
+  extraReducers: (builder) => {
     builder
-    .addCase(getFilmActions.pending,(state: FilmList)=>{
-      state.isLoading = true;
-    })
-    .addCase(getFilmActions.fulfilled,(state: FilmList,{payload})=>{
-      if(payload){
-        state.list = payload
-      } else{
-        state.list= []
-      }
-      state.isLoading = false
-    })
-    .addCase(getFilmActions.rejected,(state: FilmList)=>{
-      state.isLoading = false
-    })
+      .addCase(getFilmActions.pending, (state: FilmList) => {
+        state.isLoading = true;
+      })
+      .addCase(getFilmActions.fulfilled, (state: FilmList, { payload }) => {
+        if (payload) {
+          state.list = payload;
+        } else {
+          state.list = [];
+        }
+        state.isLoading = false;
+      })
+      .addCase(getFilmActions.rejected, (state: FilmList) => {
+        state.isLoading = false;
+      });
   },
 });
 export const filmReducer = FilmSlice.reducer;

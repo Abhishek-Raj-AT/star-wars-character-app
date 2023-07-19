@@ -11,7 +11,6 @@ export const getPlanetActions = createAsyncThunk(
     try {
       const response = await getPlanet();
       if (response.status === 200) {
-        console.log("Success response", response.data.results);
         return response?.data?.results;
       } else if (response.status === 401) {
         return response?.data?.message;

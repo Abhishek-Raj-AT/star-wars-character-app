@@ -10,22 +10,25 @@ const SpeciesSlice = createSlice({
   name: "species",
   initialState,
   reducers: {},
-  extraReducers: (builder)=>{
+  extraReducers: (builder) => {
     builder
-    .addCase(getSpeciesActions.pending,(state: SpeciesList)=>{
-      state.isLoading = true;
-    })
-    .addCase(getSpeciesActions.fulfilled,(state: SpeciesList,{payload})=>{
-      if(payload){
-        state.list = payload
-      } else{
-        state.list= []
-      }
-      state.isLoading = false
-    })
-    .addCase(getSpeciesActions.rejected,(state: SpeciesList)=>{
-      state.isLoading = false
-    })
+      .addCase(getSpeciesActions.pending, (state: SpeciesList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getSpeciesActions.fulfilled,
+        (state: SpeciesList, { payload }) => {
+          if (payload) {
+            state.list = payload;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+      .addCase(getSpeciesActions.rejected, (state: SpeciesList) => {
+        state.isLoading = false;
+      });
   },
 });
 export const speciesReducer = SpeciesSlice.reducer;
