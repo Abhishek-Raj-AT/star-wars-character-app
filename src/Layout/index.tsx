@@ -26,7 +26,7 @@ const Layout = () => {
           <Link
             to="/films"
             onClick={() => {
-              handleTabClick("/");
+              handleTabClick("/films");
               dispatch(getFilmActions({ id: 1 }));
             }}
           >

@@ -4,7 +4,7 @@ import { hasError, hasSuccess } from "./ApiHelper";
 
 export async function getVehicle() {
   try {
-    const response = await appClient.get(apiConfig.endPoints.Vehicle );
+    const response = await appClient.get(apiConfig.endPoints.vehicle );
     return hasSuccess(response.data);
   } catch (error) {
     return hasError(error);

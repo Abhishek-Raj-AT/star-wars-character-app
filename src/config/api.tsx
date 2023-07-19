@@ -4,7 +4,7 @@ const api ={
         people: "people/",
         planets: "planets/",
         species: "species/",
-        Vehicle: "vehicles/",
+        vehicle: "vehicles/",
         starShip: "starships/",
     }
 }

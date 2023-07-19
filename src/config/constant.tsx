@@ -6,15 +6,6 @@ const constant = {
       maxSize: 200,
       defaultCurrentPaginationNumber: 1,
     },
-    timer: {
-      defaultSearchTimer: 500,
-    },
-    defaultPaginationOption: [
-      { label: 10, id: 10 },
-      { label: 25, id: 25 },
-      { label: 50, id: 50 },
-      { label: 100, id: 100 },
-    ],
     APIResponse: {
       defaultStatusCode: 200,
       errorStatusCode: 401,
