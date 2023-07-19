@@ -1,12 +1,20 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
+import { useEffect } from "react";
+import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAyscThunk";
 
 const Species = () => {
   const speciesList = useSelector(
     (state: IRootState) => state.speciesStateData.list
   );
   const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
+  const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(getSpeciesActions({
+      id: 0
+    }))
+  },[dispatch])
   return (
     <>
     {loading ? <Loader/>:<div>

@@ -1,11 +1,18 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
+import { useEffect } from "react";
+import { getPlanetActions } from "../../redux/PlanetsSlice/PlanetAyscThunk";
 
 const Planets = () => {
   const planetList = useSelector(
     (state: IRootState) => state.planetStateData.list
-  );
+  );const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(getPlanetActions({
+      id: 0
+    }))
+  },[dispatch])
   const loading = useSelector((state:IRootState)=>state.planetStateData.isLoading)
   return (
     <>

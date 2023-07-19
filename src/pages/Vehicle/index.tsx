@@ -1,12 +1,20 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
+import { getVehicleActions } from "../../redux/VehicleSlice/VehicleAyscThnk";
+import { useEffect } from "react";
 
 const Vehicle = () => {
+  const dispatch = useAppDispatch()
   const vehicleList = useSelector(
     (state: IRootState) => state.vehicleStateData.list
   );
-  const loading = useSelector((state: IRootState)=>state.vehicleStateData.isLoading)
+  const loading = useSelector((state:IRootState)=>state.vehicleStateData.isLoading)
+  useEffect(()=>{
+    dispatch(getVehicleActions({
+      id: 1
+    }))
+  },[dispatch])
   return (
     <>
     {loading? <Loader/>:<div>

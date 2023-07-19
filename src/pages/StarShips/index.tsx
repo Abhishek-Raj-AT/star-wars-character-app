@@ -1,12 +1,20 @@
 import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/store";
+import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
+import { useEffect } from "react";
+import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAyscThunk";
 
 const StarShips = () => {
+  const dispatch = useAppDispatch()
   const starShipList = useSelector(
     (state: IRootState) => state.starShipStateData.list
   );
   const loading = useSelector((state:IRootState) =>state.starShipStateData.isLoading)
+  useEffect(()=>{
+    dispatch(getStarshipActions({
+      id: 1
+    }))
+  },[dispatch])
   return (
     <>
     {loading ? <Loader/>:<div>
