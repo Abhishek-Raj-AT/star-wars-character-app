@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/store";
+import { Loader } from "../../Loader";
 
 const People = () => {
   const peopleList = useSelector(
     (state: IRootState) => state.peopleStateData.list
   );
+  const loading = useSelector((state: IRootState) => state.peopleStateData.isLoading)
   return (
     <>
+    {loading ? <Loader/>:<div>
       {peopleList.map((person, id) => {
         return (
-          <ul>
+          <ul key={id}>
             <p> name:{person.name}</p>
             <p> height:{person.height}</p>
             <p> Hair Color:{person.hair_color}</p>
@@ -21,6 +24,7 @@ const People = () => {
           </ul>
         );
       })}
+      </div>}
     </>
   );
 };

@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/store";
+import { Loader } from "../../Loader";
 
 const Vehicle = () => {
   const vehicleList = useSelector(
     (state: IRootState) => state.vehicleStateData.list
   );
+  const loading = useSelector((state: IRootState)=>state.vehicleStateData.isLoading)
   return (
     <>
+    {loading? <Loader/>:<div>
       {vehicleList.map((vehicle, id) => {
         return (
           <ul key={id}>
@@ -69,6 +72,7 @@ const Vehicle = () => {
           </ul>
         );
       })}
+      </div>}
     </>
   );
 };

@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/store";
+import { Loader } from "../../Loader";
 
 const StarShips = () => {
   const starShipList = useSelector(
     (state: IRootState) => state.starShipStateData.list
   );
+  const loading = useSelector((state:IRootState) =>state.starShipStateData.isLoading)
   return (
-    <div>
-      {starShipList.map((starShips) => {
+    <>
+    {loading ? <Loader/>:<div>
+      {starShipList.map((starShips,id) => {
         return (
-          <ul>
+          <ul key={id}>
             <p>{starShips.name}</p>
             <p>{starShips.model}</p>
             <p>{starShips.starship_class}</p>
@@ -28,7 +31,8 @@ const StarShips = () => {
           </ul>
         );
       })}
-    </div>
+    </div>}
+    </>
   );
 };
 export default StarShips;

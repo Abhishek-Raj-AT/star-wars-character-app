@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/store";
+import { Loader } from "../../Loader";
 
 const Species = () => {
   const speciesList = useSelector(
     (state: IRootState) => state.speciesStateData.list
   );
+  const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
   return (
     <>
+    {loading ? <Loader/>:<div>
       {speciesList.map((species, id) => {
         return (
           <ul key={id}>
@@ -65,6 +68,7 @@ const Species = () => {
           </ul>
         );
       })}
+      </div>}
     </>
   );
 };
