@@ -10,7 +10,9 @@ const Planets = () => {
   );const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getPlanetActions({
-      id: 0
+      id: 0,
+      page: 1,
+      size: 1
     }))
   },[dispatch])
   const loading = useSelector((state:IRootState)=>state.planetStateData.isLoading)

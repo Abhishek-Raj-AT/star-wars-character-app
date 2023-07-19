@@ -12,7 +12,9 @@ const Species = () => {
   const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getSpeciesActions({
-      id: 0
+      id: 0,
+      page: 1,
+      size: 1
     }))
   },[dispatch])
   return (

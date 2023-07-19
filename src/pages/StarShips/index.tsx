@@ -12,7 +12,9 @@ const StarShips = () => {
   const loading = useSelector((state:IRootState) =>state.starShipStateData.isLoading)
   useEffect(()=>{
     dispatch(getStarshipActions({
-      id: 1
+      id: 1,
+      page: 0,
+      size: 0
     }))
   },[dispatch])
   return (

@@ -11,7 +11,9 @@ const People = () => {
   const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getPeopleActions({
-      id: 0
+      id: 0,
+      page: 0,
+      size: 0
     }))
   },[dispatch])
   const loading = useSelector((state: IRootState) => state.peopleStateData.isLoading)

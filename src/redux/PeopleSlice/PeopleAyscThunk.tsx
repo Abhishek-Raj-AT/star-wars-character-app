@@ -3,15 +3,17 @@ import { getFilm } from "../../service/filmService";
 import { getPeople } from "../../service/PeopleService";
 import constant from "../../config/constant";
 
-interface GetPeopleList {
+export interface GetPeopleList {
   id: number;
+  page: number;
+  size: number;
 }
 
 export const getPeopleActions = createAsyncThunk(
   "people/getPeopleActions",
   async (payload: GetPeopleList, { dispatch, getState }) => {
     try {
-      const response = await getPeople();
+      const response = await getPeople(payload);
       if (response.status === constant.APIResponse.defaultStatusCode) {
         return response?.data?.results;
       } else if (response.status === constant.APIResponse.errorStatusCode) {

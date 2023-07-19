@@ -1,3 +1,4 @@
+import constant from "../../config/constant";
 import { getFilmActions } from "./FilmAyscThunk";
 import { FilmList } from "./FilmType";
 import { createSlice } from "@reduxjs/toolkit";
@@ -6,13 +7,18 @@ const initialState: FilmList = {
   list: [],
   isLoading: false,
   value: 5,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  nextPageUrl: null,
+  prevPageUrl: null,
+  limit: constant.page.size
 };
 const FilmSlice = createSlice({
   name: "Film",
   initialState,
   reducers: {
-    increaseItems: (state, action) => {
-      state.value *= action.payload;
+    setCurrentPageSize: (state, action) => {
+      state.limit = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -22,7 +28,7 @@ const FilmSlice = createSlice({
       })
       .addCase(getFilmActions.fulfilled, (state: FilmList, { payload }) => {
         if (payload) {
-          state.list = payload;
+          state.list = payload
         } else {
           state.list = [];
         }
