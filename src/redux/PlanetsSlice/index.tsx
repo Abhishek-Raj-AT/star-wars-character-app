@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PlanetList } from "./PlanetTypes";
-import { getPlanetActions } from "./PlanetAyscThunk";
+import { getPlanetActions } from "./PlanetAsyncThunk";
 
 const initialState: PlanetList = {
   list: [],

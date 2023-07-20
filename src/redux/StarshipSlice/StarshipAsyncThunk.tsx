@@ -7,7 +7,7 @@ interface GetStarshipList {
 }
 
 export const getStarshipActions = createAsyncThunk(
-  "planet/getPeopleActions",
+  "starship/getStarshipActions",
   async (payload: GetStarshipList, { dispatch, getState }) => {
     try {
       const response = await getStarship();

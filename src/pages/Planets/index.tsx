@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
-import { getPlanetActions } from "../../redux/PlanetsSlice/PlanetAyscThunk";
+import { getPlanetActions } from "../../redux/PlanetsSlice/PlanetAsyncThunk";
 
 const Planets = () => {
   const planetList = useSelector(

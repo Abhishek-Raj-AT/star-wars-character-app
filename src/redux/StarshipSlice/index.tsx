@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StarshipList } from "./StarshipTypes";
-import { getStarshipActions } from "./StarshipAyscThunk";
+import { getStarshipActions } from "./StarshipAsyncThunk";
 
 const initialState: StarshipList = {
   list: [],
