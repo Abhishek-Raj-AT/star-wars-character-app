@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
-import { getFilmActions } from "../../redux/FilmSlice/FilmAyscThunk";
+import { getFilmActions } from "../../redux/FilmSlice/FilmAsyncThunk";
 
 const Films = () => {
   const filmList = useSelector((state: IRootState) => state.filmStateData.list);

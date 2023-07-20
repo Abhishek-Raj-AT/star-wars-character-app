@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PeoplesList } from "./PeopleType";
-import { getPeopleActions } from "./PeopleAyscThunk";
+import { getPeopleActions } from "./PeopleAsyncThunk";
 
 const initialState: PeoplesList = {
   list: [],

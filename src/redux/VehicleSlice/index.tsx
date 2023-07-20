@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { VehicleList } from "./Vehicletypes";
-import { getVehicleActions } from "./VehicleAyscThnk";
+import { getVehicleActions } from "./VehicleAsyncThunk";
 
 const initialState: VehicleList = {
   list: [],

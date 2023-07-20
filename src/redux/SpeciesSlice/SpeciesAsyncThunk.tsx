@@ -7,7 +7,7 @@ interface GetSpeciesList {
 }
 
 export const getSpeciesActions = createAsyncThunk(
-  "planet/getPeopleActions",
+  "species/getSpeciesActions",
   async (payload: GetSpeciesList, { dispatch, getState }) => {
     try {
       const response = await getPlanet();

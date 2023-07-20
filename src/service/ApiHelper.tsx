@@ -1,6 +1,6 @@
 export function hasSuccess(data: any) {
-    if (data && typeof data.isException !== "undefined" &&
-    data.isException === true) {
+    if (data && typeof data !== "undefined" &&
+    data === true ) {
       return data;
     }
     return {

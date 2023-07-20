@@ -1,4 +1,4 @@
-import { getFilmActions } from "./FilmAyscThunk";
+import { getFilmActions } from "./FilmAsyncThunk";
 import { FilmList } from "./FilmType";
 import { createSlice } from "@reduxjs/toolkit";
 

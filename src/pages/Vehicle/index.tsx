@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
-import { getVehicleActions } from "../../redux/VehicleSlice/VehicleAyscThnk";
+import { getVehicleActions } from "../../redux/VehicleSlice/VehicleAsyncThunk";
 import { useEffect } from "react";
 
 const Vehicle = () => {

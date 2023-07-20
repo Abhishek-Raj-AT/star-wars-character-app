@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
-import { getPeopleActions } from "../../redux/PeopleSlice/PeopleAyscThunk";
+import { getPeopleActions } from "../../redux/PeopleSlice/PeopleAsyncThunk";
 
 const People = () => {
   const peopleList = useSelector(
