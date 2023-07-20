@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
-import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAyscThunk";
+import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAsyncThunk";
 
 const Species = () => {
   const speciesList = useSelector(

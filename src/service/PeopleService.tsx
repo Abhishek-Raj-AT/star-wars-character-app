@@ -1,7 +1,7 @@
 import { appClient } from "./NetworkService";
 import apiConfig from "../config/api";
 import { hasError, hasSuccess } from "./ApiHelper";
-import { GetPeopleList } from "../redux/PeopleSlice/PeopleAyscThunk";
+import { GetPeopleList } from "../redux/PeopleSlice/PeopleAsyncThunk";
 
 export async function getPeople(payload:GetPeopleList) {
   try {

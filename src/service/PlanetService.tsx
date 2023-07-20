@@ -1,7 +1,7 @@
 import { appClient } from "./NetworkService";
 import apiConfig from "../config/api";
 import { hasError, hasSuccess } from "./ApiHelper";
-import { GetPlanetList } from "../redux/PlanetsSlice/PlanetAyscThunk";
+import { GetPlanetList } from "../redux/PlanetsSlice/PlanetAsyncThunk";
 
 export async function getPlanet(payload: GetPlanetList) {
   try {

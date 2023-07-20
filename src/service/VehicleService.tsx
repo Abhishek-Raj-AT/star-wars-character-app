@@ -1,7 +1,7 @@
 import { appClient } from "./NetworkService";
 import apiConfig from "../config/api";
 import { hasError, hasSuccess } from "./ApiHelper";
-import { GetVehicleList } from "../redux/VehicleSlice/VehicleAyscThnk";
+import { GetVehicleList } from "../redux/VehicleSlice/VehicleAsyncThunk";
 
 export async function getVehicle(payload: GetVehicleList) {
   try {

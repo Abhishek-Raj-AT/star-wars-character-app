@@ -1,7 +1,7 @@
 import { appClient } from "./NetworkService";
 import apiConfig from "../config/api";
 import { hasError, hasSuccess } from "./ApiHelper";
-import { GetStarshipList } from "../redux/StarshipSlice/StarshipAyscThunk";
+import { GetStarshipList } from "../redux/StarshipSlice/StarshipAsyncThunk";
 
 export async function getStarship(payload: GetStarshipList) {
   try {

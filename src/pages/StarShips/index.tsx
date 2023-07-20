@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
-import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAyscThunk";
+import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAsyncThunk";
 
 const StarShips = () => {
   const dispatch = useAppDispatch()

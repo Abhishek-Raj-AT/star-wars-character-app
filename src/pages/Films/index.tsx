@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect, useState } from "react";
-import { getFilmActions } from "../../redux/FilmSlice/FilmAyscThunk";
+import { getFilmActions } from "../../redux/FilmSlice/FilmAsyncThunk";
 import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { filmAction } from "../../redux/FilmSlice";

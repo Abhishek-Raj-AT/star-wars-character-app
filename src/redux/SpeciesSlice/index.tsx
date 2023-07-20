@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSpeciesActions } from "./SpeciesAyscThunk";
+import { getSpeciesActions } from "./SpeciesAsyncThunk";
 import { SpeciesList } from "./SpeciesTypes";
 
 const initialState: SpeciesList = {
