@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
+import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAsyncThunk";
 
@@ -7,6 +8,7 @@ const Species = () => {
   const speciesList = useSelector(
     (state: IRootState) => state.speciesStateData.list
   );
+  const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
   const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getSpeciesActions({
@@ -15,6 +17,7 @@ const Species = () => {
   },[dispatch])
   return (
     <>
+    {loading ? <Loader/>:<div>
       {speciesList.map((species, id) => {
         return (
           <ul key={id}>
@@ -73,6 +76,7 @@ const Species = () => {
           </ul>
         );
       })}
+      </div>}
     </>
   );
 };

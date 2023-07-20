@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
+import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAsyncThunk";
 
@@ -8,13 +9,15 @@ const StarShips = () => {
   const starShipList = useSelector(
     (state: IRootState) => state.starShipStateData.list
   );
+  const loading = useSelector((state:IRootState) =>state.starShipStateData.isLoading)
   useEffect(()=>{
     dispatch(getStarshipActions({
       id: 1
     }))
   },[dispatch])
   return (
-    <div>
+    <>
+    {loading ? <Loader/>:<div>
       {starShipList.map((starShips,id) => {
         return (
           <ul key={id}>
@@ -36,7 +39,8 @@ const StarShips = () => {
           </ul>
         );
       })}
-    </div>
+    </div>}
+    </>
   );
 };
 export default StarShips;

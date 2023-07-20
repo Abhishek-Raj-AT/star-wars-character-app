@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
+import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getPeopleActions } from "../../redux/PeopleSlice/PeopleAsyncThunk";
 
@@ -13,8 +14,10 @@ const People = () => {
       id: 0
     }))
   },[dispatch])
+  const loading = useSelector((state: IRootState) => state.peopleStateData.isLoading)
   return (
     <>
+    {loading ? <Loader/>:<div>
       {peopleList.map((person, id) => {
         return (
           <ul key={id}>
@@ -29,6 +32,7 @@ const People = () => {
           </ul>
         );
       })}
+      </div>}
     </>
   );
 };

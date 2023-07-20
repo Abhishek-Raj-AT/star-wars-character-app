@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../redux/store";
+import { Loader } from "../../Loader";
 import { getVehicleActions } from "../../redux/VehicleSlice/VehicleAsyncThunk";
 import { useEffect } from "react";
 
@@ -16,6 +17,7 @@ const Vehicle = () => {
   },[dispatch])
   return (
     <>
+    {loading? <Loader/>:<div>
       {vehicleList.map((vehicle, id) => {
         return (
           <ul key={id}>
@@ -78,6 +80,7 @@ const Vehicle = () => {
           </ul>
         );
       })}
+      </div>}
     </>
   );
 };
