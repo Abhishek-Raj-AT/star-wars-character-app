@@ -3,24 +3,40 @@ import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getPeopleActions } from "../../redux/PeopleSlice/PeopleAsyncThunk";
+import Pagination from "../../Components/Pagination";
+import constant from "../../config/constant";
+import { setTotalPageCount } from "../../service/ApiHelper";
 
 const People = () => {
-  const peopleList = useSelector(
-    (state: IRootState) => state.peopleStateData.list
+  const {list,page, total, limit} = useSelector(
+    (state: IRootState) => state.peopleStateData
   );
   const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getPeopleActions({
-      id: 0,
-      page: 0,
-      size: 0
+      id: constant.defaultUserId,
+        page,
+        size: limit,
     }))
-  },[dispatch])
+  },[dispatch, limit, page])
+  console.log("person", list);
+  
+  const totalPage = setTotalPageCount(total, limit);
   const loading = useSelector((state: IRootState) => state.peopleStateData.isLoading)
+  const pageChangeHandler = (currentPage: number)=>{
+    const page = Number(currentPage +1);
+    dispatch(
+      getPeopleActions({
+        page,
+        size: limit,
+      })
+    );
+  }
   return (
     <>
+    <div>
     {loading ? <Loader/>:<div>
-      {peopleList.map((person, id) => {
+      {list.map((person, id) => {
         return (
           <ul key={id}>
             <p> name:{person.name}</p>
@@ -35,7 +51,12 @@ const People = () => {
         );
       })}
       </div>}
-    </>
+      </div>
+      <Pagination
+        page={page}
+        onPageChangeHandler={pageChangeHandler}
+        totalPages={10}
+      />    </>
   );
 };
 export default People;

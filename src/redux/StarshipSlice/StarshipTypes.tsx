@@ -21,4 +21,9 @@ export interface Starship {
 export interface StarshipList {
   list: Starship[];
   isLoading: boolean;
+  page: number;
+  total: number;
+  nextPageUrl: null | string;
+  prevPageUrl: null | string;
+  limit: number;
 }

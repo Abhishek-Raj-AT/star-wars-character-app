@@ -3,24 +3,38 @@ import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAsyncThunk";
+import { setTotalPageCount } from "../../service/ApiHelper";
+import Pagination from "../../Components/Pagination";
+import constant from "../../config/constant";
 
 const StarShips = () => {
   const dispatch = useAppDispatch()
-  const starShipList = useSelector(
-    (state: IRootState) => state.starShipStateData.list
-  );
+  const {list, page, total, limit} = useSelector(
+    (state: IRootState) => state.starShipStateData
+    );
+    const totalPage = setTotalPageCount(total, limit);
   const loading = useSelector((state:IRootState) =>state.starShipStateData.isLoading)
   useEffect(()=>{
     dispatch(getStarshipActions({
-      id: 1,
-      page: 0,
-      size: 0
+      id: constant.defaultUserId,
+        page,
+        size: limit,
     }))
-  },[dispatch])
+  },[dispatch, limit, page])
+  const pageChangeHandler = (currentPage: number) => {
+    const page = Number(currentPage);
+    dispatch(
+      getStarshipActions({
+        page,
+        size: limit,
+      })
+    );
+  };
   return (
     <>
+    <div>
     {loading ? <Loader/>:<div>
-      {starShipList.map((starShips,id) => {
+      {list.map((starShips,id) => {
         return (
           <ul key={id}>
             <p>{starShips.name}</p>
@@ -42,6 +56,14 @@ const StarShips = () => {
         );
       })}
     </div>}
+    <Pagination
+        page={page}
+        onPageChangeHandler={pageChangeHandler}
+        totalPages={totalPage > 0
+          ? totalPage
+          : constant.page.defaultCurrentPaginationNumber}
+      />
+    </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ import { GetStarshipList } from "../redux/StarshipSlice/StarshipAsyncThunk";
 
 export async function getStarship(payload: GetStarshipList) {
   try {
-    const response = await appClient.get(apiConfig.endPoints.planets + "?page=" + payload.page + "&size=" + payload.size);
+    const response = await appClient.get(apiConfig.endPoints.starShip + "?page=" + payload.page + "&size=" + payload.size);
     return hasSuccess(response.data);
   } catch (error) {
     return hasError(error);

@@ -3,7 +3,7 @@ import { getPlanet } from "../../service/PlanetService";
 import constant from "../../config/constant";
 
 export interface GetPlanetList {
-  id: number;
+  id?: number;
   page: number
   size: number;
 }

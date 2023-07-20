@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { VehicleList } from "./Vehicletypes";
 import { getVehicleActions } from "./VehicleAsyncThunk";
+import constant from "../../config/constant";
 
 const initialState: VehicleList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  nextPageUrl: null,
+  prevPageUrl: null,
+  limit: constant.page.size
 };
 const VehicleSlice = createSlice({
   name: "Vehicle",

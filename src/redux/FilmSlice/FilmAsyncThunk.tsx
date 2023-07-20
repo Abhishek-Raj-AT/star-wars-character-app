@@ -3,7 +3,7 @@ import { getFilm } from "../../service/filmService";
 import constant from "../../config/constant";
 
 export interface GetFilmList {
-  id: number;
+  id?: number;
   page: number
   size: number
 }

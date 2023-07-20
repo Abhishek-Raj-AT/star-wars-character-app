@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getVehicle } from "../../service/VehicleService";
 import constant from "../../config/constant";
 export interface GetVehicleList {
-  id: number;
+  id?: number;
   page: number;
   size: number;
 }

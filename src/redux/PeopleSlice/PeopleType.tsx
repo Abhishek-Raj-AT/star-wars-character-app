@@ -14,4 +14,9 @@ export interface Peoples {
 export interface PeoplesList {
   list: Peoples[];
   isLoading: boolean;
+  page: number;
+  total: number;
+  nextPageUrl: null | string;
+  prevPageUrl: null | string;
+  limit: number;
 }

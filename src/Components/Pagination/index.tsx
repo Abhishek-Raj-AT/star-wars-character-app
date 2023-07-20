@@ -1,65 +1,66 @@
-import React, { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+interface SelectInputValue {
+  id: number;
+  label: number;
+}
 
 interface PaginationProps {
-  totalCount: number;
-  limit: number;
-  nextPageUrl: boolean;
-  prevPageUrl: boolean;
-  currentPage: number;
-  onButtonClick: (page: string | number) => void;
+  page: number;
+  totalPages: number;
+  numPages?: number;
+  searchInput?: string;
+  pageSizeValue?: SelectInputValue[];
+  onPageChangeHandler: (page: number) => void;
+  onPageSizeChangeHandler?: (pageSize: number) => void;
 }
-const Pagination: FC<PaginationProps> = ({
-  currentPage,
-  totalCount,
-  limit,
-  nextPageUrl,
-  prevPageUrl,
-  onButtonClick,
-}) => {
-  const totalPages = Math.ceil(totalCount / limit);
 
-  const generatePageNumbers = () => {
-    const pageNumbers = [];
+const Pagination = ({
+  page,
+  totalPages,
+  onPageChangeHandler,
+}: PaginationProps) => {
 
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      onPageChangeHandler(page - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      onPageChangeHandler(page + 1);
+    }
+  };
+  const renderPageLinks = () => {
+    const links = [];
     for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(
+      const linkClass = i === page ? "active" : "";
+      links.push(
         <button
           key={i}
-          className={currentPage === i ? "active" : ""}
-          onClick={() => onButtonClick(i)}
+          className={linkClass}
+          onClick={() => onPageChangeHandler(i+1)}
         >
           {i}
         </button>
       );
     }
-
-    return pageNumbers;
+    return links;
   };
-
-  return (
-    <div className="pagination" style={{textAlign:"center"}}>
-      {prevPageUrl && (
-        <button
-          className="prev"
-          onClick={() => onButtonClick(currentPage - 1)}
-        >
-          prev
-        </button>
-      )}
-
-      {generatePageNumbers()}
-
-      {nextPageUrl && (
-        <button
-          className="next"
-          onClick={() => onButtonClick(currentPage + 1)}
-        >
-          next
-        </button>
-      )}
+  return(
+        <div className="pagination2"
+        style={{textAlign: "center"}}>
+          <span>{`Page ${page} of ${totalPages}:`}</span>
+          <>
+          <button onClick={handlePreviousPage} disabled={page === 1}>prev</button>
+          {renderPageLinks()}
+          <button onClick={handleNextPage} disabled={page === totalPages}>next</button>
+          </>
+          <Link to="#">
+            <i className="ion-arrow-right-b"></i>
+          </Link>
     </div>
   );
 };
-
 export default Pagination;

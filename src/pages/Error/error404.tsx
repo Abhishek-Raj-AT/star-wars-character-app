@@ -10,7 +10,7 @@ const Error404: FC = () => {
         {Strings.weCanNotFindThatPage}
       </div>
       <div className="mb-0">
-        <Link to="/dashboard" className="btn btn-sm btn-primary">
+        <Link to="/" className="btn btn-sm btn-primary">
           {Strings.returnHome}
         </Link>
       </div>

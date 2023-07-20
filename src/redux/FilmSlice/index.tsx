@@ -6,7 +6,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState: FilmList = {
   list: [],
   isLoading: false,
-  value: 5,
   page: constant.page.defaultNumber,
   total: constant.page.defaultTotal,
   nextPageUrl: null,
@@ -19,6 +18,9 @@ const FilmSlice = createSlice({
   reducers: {
     setCurrentPageSize: (state, action) => {
       state.limit = action.payload;
+    },
+    setCurrentPage(state, action) {
+      state.page = action.payload
     },
   },
   extraReducers: (builder) => {

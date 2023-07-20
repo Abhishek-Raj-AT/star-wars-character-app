@@ -4,7 +4,7 @@ import { getPeople } from "../../service/PeopleService";
 import constant from "../../config/constant";
 
 export interface GetPeopleList {
-  id: number;
+  id?: number;
   page: number;
   size: number;
 }
@@ -15,6 +15,7 @@ export const getPeopleActions = createAsyncThunk(
     try {
       const response = await getPeople(payload);
       if (response.status === constant.APIResponse.defaultStatusCode) {
+        console.log("next page",response.data.next.results)
         return response?.data?.results;
       } else if (response.status === constant.APIResponse.errorStatusCode) {
         return response?.data?.message;

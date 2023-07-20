@@ -20,3 +20,7 @@ export function hasSuccess(data: any) {
     }
     return err;
   }
+
+  export const setTotalPageCount = (totalRecords: number, limit: number) => {
+    return Math.ceil(totalRecords / limit)
+  }

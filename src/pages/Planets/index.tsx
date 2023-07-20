@@ -3,23 +3,37 @@ import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getPlanetActions } from "../../redux/PlanetsSlice/PlanetAsyncThunk";
+import Pagination from "../../Components/Pagination";
+import constant from "../../config/constant";
+import { setTotalPageCount } from "../../service/ApiHelper";
 
 const Planets = () => {
-  const planetList = useSelector(
-    (state: IRootState) => state.planetStateData.list
+  const {list, page, total, limit } = useSelector(
+    (state: IRootState) => state.planetStateData
   );const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getPlanetActions({
-      id: 0,
-      page: 1,
-      size: 1
+      id: constant.defaultUserId,
+        page,
+        size: limit,
     }))
-  },[dispatch])
+  },[dispatch, limit, page])
+  const totalPage = setTotalPageCount(total, limit);
+  const pageChangeHandler = (currentPage: number) => {
+    const page = Number(currentPage);
+    dispatch(
+      getPlanetActions({
+        page,
+        size: limit,
+      })
+    );
+  };
   const loading = useSelector((state:IRootState)=>state.planetStateData.isLoading)
   return (
     <>
+    <div>
     {loading?<Loader/>:<div>
-      {planetList.map((planet, id) => {
+      {list.map((planet, id) => {
         return (
           <div key={id}>
             <ul>
@@ -76,6 +90,14 @@ const Planets = () => {
         );
       })}
     </div>}
+    <Pagination
+        page={page}
+        onPageChangeHandler={pageChangeHandler}
+        totalPages={totalPage > 0
+          ? totalPage
+          : constant.page.defaultCurrentPaginationNumber}
+      />
+    </div>
     </>
   );
 };

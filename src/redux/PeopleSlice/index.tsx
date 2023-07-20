@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PeoplesList } from "./PeopleType";
 import { getPeopleActions } from "./PeopleAsyncThunk";
+import constant from "../../config/constant";
 
 const initialState: PeoplesList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  nextPageUrl: null,
+  prevPageUrl: null,
+  limit: constant.page.size
 };
 const PeopleSlice = createSlice({
   name: "Film",

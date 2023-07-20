@@ -3,7 +3,7 @@ import { getStarship } from "../../service/StarshipService";
 import constant from "../../config/constant";
 
 export interface GetStarshipList {
-  id: number;
+  id?: number;
   page: number;
   size: number;
 }

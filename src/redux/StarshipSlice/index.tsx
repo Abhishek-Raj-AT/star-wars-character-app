@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StarshipList } from "./StarshipTypes";
 import { getStarshipActions } from "./StarshipAsyncThunk";
+import constant from "../../config/constant";
 
 const initialState: StarshipList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  nextPageUrl: null,
+  prevPageUrl: null,
+  limit: constant.page.size
 };
 const StarshipSlice = createSlice({
   name: "StarShip",

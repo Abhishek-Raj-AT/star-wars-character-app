@@ -3,13 +3,17 @@ import { IRootState, useAppDispatch } from "../../redux/store";
 import { Loader } from "../../Loader";
 import { useEffect } from "react";
 import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAsyncThunk";
+import Pagination from "../../Components/Pagination";
+import constant from "../../config/constant";
+import { setTotalPageCount } from "../../service/ApiHelper";
 
 const Species = () => {
-  const speciesList = useSelector(
-    (state: IRootState) => state.speciesStateData.list
+  const {list,page, total, limit} = useSelector(
+    (state: IRootState) => state.speciesStateData
   );
   const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
   const dispatch = useAppDispatch()
+  const totalPage = setTotalPageCount(total, limit);
   useEffect(()=>{
     dispatch(getSpeciesActions({
       id: 0,
@@ -17,10 +21,21 @@ const Species = () => {
       size: 1
     }))
   },[dispatch])
+
+  const pageChangeHandler = (currentPage: number) => {
+    const page = Number(currentPage);
+    dispatch(
+      getSpeciesActions({
+        page,
+        size: limit,
+      })
+    );
+  };
   return (
     <>
+    <div>
     {loading ? <Loader/>:<div>
-      {speciesList.map((species, id) => {
+      {list.map((species, id) => {
         return (
           <ul key={id}>
             <p>
@@ -79,6 +94,14 @@ const Species = () => {
         );
       })}
       </div>}
+      <Pagination
+        page={page}
+        onPageChangeHandler={pageChangeHandler}
+        totalPages={totalPage > 0
+          ? totalPage
+          : constant.page.defaultCurrentPaginationNumber}
+      />
+      </div>
     </>
   );
 };
