@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getFilm } from "../../service/filmService";
 import { getPeople } from "../../service/PeopleService";
 import constant from "../../config/constant";
 
@@ -15,8 +14,10 @@ export const getPeopleActions = createAsyncThunk(
     try {
       const response = await getPeople(payload);
       if (response.status === constant.APIResponse.defaultStatusCode) {
-        console.log("next page",response.data.next.results)
-        return response?.data?.results;
+        return {
+          data: response?.data?.results,
+          count: response?.data?.count
+        }
       } else if (response.status === constant.APIResponse.errorStatusCode) {
         return response?.data?.message;
       }

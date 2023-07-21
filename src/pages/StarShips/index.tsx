@@ -6,6 +6,7 @@ import { getStarshipActions } from "../../redux/StarshipSlice/StarshipAsyncThunk
 import { setTotalPageCount } from "../../service/ApiHelper";
 import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
+import { starshipAction } from "../../redux/StarshipSlice";
 
 const StarShips = () => {
   const dispatch = useAppDispatch()
@@ -23,6 +24,7 @@ const StarShips = () => {
   },[dispatch, limit, page])
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
+    dispatch(starshipAction.setCurrentPage(page))
     dispatch(
       getStarshipActions({
         page,

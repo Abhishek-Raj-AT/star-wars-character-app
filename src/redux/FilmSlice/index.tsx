@@ -30,7 +30,8 @@ const FilmSlice = createSlice({
       })
       .addCase(getFilmActions.fulfilled, (state: FilmList, { payload }) => {
         if (payload) {
-          state.list = payload
+          state.list = payload?.data
+          state.total = payload?.count
         } else {
           state.list = [];
         }

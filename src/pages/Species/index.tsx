@@ -6,6 +6,7 @@ import { getSpeciesActions } from "../../redux/SpeciesSlice/SpeciesAsyncThunk";
 import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
+import { speciesAction } from "../../redux/SpeciesSlice";
 
 const Species = () => {
   const {list,page, total, limit} = useSelector(
@@ -24,6 +25,7 @@ const Species = () => {
 
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
+    dispatch(speciesAction.setCurrentPage(page))
     dispatch(
       getSpeciesActions({
         page,

@@ -15,7 +15,11 @@ const initialState: StarshipList = {
 const StarshipSlice = createSlice({
   name: "StarShip",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getStarshipActions.pending, (state: StarshipList) => {
@@ -25,7 +29,8 @@ const StarshipSlice = createSlice({
         getStarshipActions.fulfilled,
         (state: StarshipList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count
           } else {
             state.list = [];
           }

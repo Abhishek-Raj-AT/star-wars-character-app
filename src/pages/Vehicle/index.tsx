@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import Pagination from "../../Components/Pagination";
+import { vehicleAction } from "../../redux/VehicleSlice";
 
 const Vehicle = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ const Vehicle = () => {
   const totalPage = setTotalPageCount(total, limit);
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
+    dispatch(vehicleAction.setCurrentPage(page));
     dispatch(
       getVehicleActions({
         page,
@@ -108,12 +110,10 @@ const Vehicle = () => {
         <Pagination
           page={page}
           onPageChangeHandler={pageChangeHandler}
-          totalPages={
-            totalPage > 0
+          totalPages={5} 
+            numPages={totalPage > 0
               ? totalPage
-              : constant.page.defaultCurrentPaginationNumber
-          }
-        />
+              : constant.page.defaultCurrentPaginationNumber}/>
       </div>
     </>
   );

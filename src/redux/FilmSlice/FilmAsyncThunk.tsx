@@ -14,7 +14,10 @@ export const getFilmActions = createAsyncThunk(
     try {
       const response = await getFilm(payload);
       if (response.status === constant.APIResponse.defaultStatusCode) {
-        return response?.data?.results;
+        return{
+          data: response?.data?.results,
+          count: response?.data?.count,
+        }
       } else if (response.status === constant.APIResponse.errorStatusCode) {
         return response?.data?.message;
       }

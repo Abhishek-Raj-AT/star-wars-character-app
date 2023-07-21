@@ -15,7 +15,11 @@ const initialState: SpeciesList = {
 const SpeciesSlice = createSlice({
   name: "species",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getSpeciesActions.pending, (state: SpeciesList) => {
@@ -25,7 +29,8 @@ const SpeciesSlice = createSlice({
         getSpeciesActions.fulfilled,
         (state: SpeciesList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count
           } else {
             state.list = [];
           }

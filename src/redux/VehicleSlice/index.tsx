@@ -15,7 +15,11 @@ const initialState: VehicleList = {
 const VehicleSlice = createSlice({
   name: "Vehicle",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getVehicleActions.pending, (state: VehicleList) => {
@@ -25,7 +29,8 @@ const VehicleSlice = createSlice({
         getVehicleActions.fulfilled,
         (state: VehicleList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count
           } else {
             state.list = [];
           }

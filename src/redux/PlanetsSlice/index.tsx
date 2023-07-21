@@ -15,7 +15,11 @@ const initialState: PlanetList = {
 const PlanetSlice = createSlice({
   name: "Film",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPlanetActions.pending, (state: PlanetList) => {
@@ -23,7 +27,8 @@ const PlanetSlice = createSlice({
       })
       .addCase(getPlanetActions.fulfilled, (state: PlanetList, { payload }) => {
         if (payload) {
-          state.list = payload;
+          state.list = payload?.data;
+          state.total = payload?.count;
         } else {
           state.list = [];
         }

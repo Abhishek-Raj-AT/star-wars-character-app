@@ -6,6 +6,7 @@ import { getPlanetActions } from "../../redux/PlanetsSlice/PlanetAsyncThunk";
 import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
+import { planetAction } from "../../redux/PlanetsSlice";
 
 const Planets = () => {
   const {list, page, total, limit } = useSelector(
@@ -21,6 +22,7 @@ const Planets = () => {
   const totalPage = setTotalPageCount(total, limit);
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
+    dispatch(planetAction.setCurrentPage(page));
     dispatch(
       getPlanetActions({
         page,
