@@ -1,17 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface SelectInputValue {
-  id: number;
-  label: number;
-}
-
 interface PaginationProps {
   page: number;
   totalPages: number;
-  numPages?: number;
-  searchInput?: string;
-  pageSizeValue?: SelectInputValue[];
   onPageChangeHandler: (page: number) => void;
   onPageSizeChangeHandler?: (pageSize: number) => void;
 }
@@ -51,7 +43,7 @@ const Pagination = ({
   };
 
   return (
-    <div className="pagination2" style={{ textAlign: "center" }}>
+    <div className="pagination2" style={{ textAlign: "center", marginBottom: "10px" }}>
       <span>{`Page ${page} of ${totalPages}:`}</span>
       <>
         <button onClick={handlePreviousPage} disabled={page === 1}>

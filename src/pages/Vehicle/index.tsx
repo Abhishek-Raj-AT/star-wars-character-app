@@ -109,9 +109,8 @@ const Vehicle = () => {
         )}
         <Pagination
           page={page}
-          onPageChangeHandler={pageChangeHandler}
-          totalPages={5} 
-            numPages={totalPage > 0
+          onPageChangeHandler={pageChangeHandler} 
+          totalPages={totalPage > 0
               ? totalPage
               : constant.page.defaultCurrentPaginationNumber}/>
       </div>
