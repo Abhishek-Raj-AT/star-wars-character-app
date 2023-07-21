@@ -17,11 +17,11 @@ const Species = () => {
   const totalPage = setTotalPageCount(total, limit);
   useEffect(()=>{
     dispatch(getSpeciesActions({
-      id: 0,
-      page: 1,
-      size: 1
+      id: constant.defaultUserId,
+        page,
+        size: limit,
     }))
-  },[dispatch])
+  },[dispatch, limit, page])
 
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);

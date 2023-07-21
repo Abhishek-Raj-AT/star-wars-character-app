@@ -1,18 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { FC } from "react";
 
 interface PaginationProps {
   page: number;
   totalPages: number;
   onPageChangeHandler: (page: number) => void;
-  onPageSizeChangeHandler?: (pageSize: number) => void;
 }
 
-const Pagination = ({
+const Pagination:FC<PaginationProps> = ({
   page,
   totalPages,
   onPageChangeHandler,
-}: PaginationProps) => {
+  }) => {
   const handlePreviousPage = () => {
     if (page > 1) {
       onPageChangeHandler(page - 1);
@@ -25,38 +23,35 @@ const Pagination = ({
     }
   };
 
-  const renderPageLinks = () => {
-    const links = [];
+  const renderPageButtons = () => {
+    const buttons = [];
     for (let i = 0; i <= totalPages-1; i++) {
-      const linkClass = i === page ? "active" : "";
-      links.push(
+      const ButtonClass = i === page ? "active" : "";
+      buttons.push(
         <button
           key={i}
-          className={linkClass}
+          className={ButtonClass}
           onClick={() => onPageChangeHandler(i+1)}
         >
           {i+1}
         </button>
       );
     }
-    return links;
+    return buttons;
   };
 
   return (
-    <div className="pagination2" style={{ textAlign: "center", marginBottom: "10px" }}>
+    <div className="pagination" style={{ textAlign: "center", marginBottom: "10px" }}>
       <span>{`Page ${page} of ${totalPages}:`}</span>
       <>
         <button onClick={handlePreviousPage} disabled={page === 1}>
           prev
         </button>
-        {renderPageLinks()}
+        {renderPageButtons()}
         <button onClick={handleNextPage} disabled={page === totalPages}>
           next
         </button>
       </>
-      <Link to="#">
-        <i className="ion-arrow-right-b"></i>
-      </Link>
     </div>
   );
 };
