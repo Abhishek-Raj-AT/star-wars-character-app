@@ -1,15 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PeoplesList } from "./PeopleType";
 import { getPeopleActions } from "./PeopleAsyncThunk";
+import constant from "../../config/constant";
 
 const initialState: PeoplesList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  limit: constant.page.size,
 };
 const PeopleSlice = createSlice({
-  name: "Film",
+  name: "people",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPeopleActions.pending, (state: PeoplesList) => {
@@ -19,7 +27,8 @@ const PeopleSlice = createSlice({
         getPeopleActions.fulfilled,
         (state: PeoplesList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count;
           } else {
             state.list = [];
           }

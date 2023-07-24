@@ -1,15 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { VehicleList } from "./Vehicletypes";
 import { getVehicleActions } from "./VehicleAsyncThunk";
+import constant from "../../config/constant";
 
 const initialState: VehicleList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  limit: constant.page.size
 };
 const VehicleSlice = createSlice({
   name: "Vehicle",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getVehicleActions.pending, (state: VehicleList) => {
@@ -19,7 +27,8 @@ const VehicleSlice = createSlice({
         getVehicleActions.fulfilled,
         (state: VehicleList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count
           } else {
             state.list = [];
           }

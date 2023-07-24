@@ -18,4 +18,7 @@ export interface Species {
 export interface SpeciesList {
   list: Species[]
   isLoading: boolean;
+  page: number;
+  total: number;
+  limit: number;
 }

@@ -1,15 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StarshipList } from "./StarshipTypes";
 import { getStarshipActions } from "./StarshipAsyncThunk";
+import constant from "../../config/constant";
 
 const initialState: StarshipList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  limit: constant.page.size
 };
 const StarshipSlice = createSlice({
   name: "StarShip",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getStarshipActions.pending, (state: StarshipList) => {
@@ -19,7 +27,8 @@ const StarshipSlice = createSlice({
         getStarshipActions.fulfilled,
         (state: StarshipList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count
           } else {
             state.list = [];
           }

@@ -16,5 +16,7 @@ export interface Film {
 export interface FilmList {
   list: Film[];
   isLoading: boolean;
-  value: number;
+  page: number;
+  total: number;
+  limit: number;
 }

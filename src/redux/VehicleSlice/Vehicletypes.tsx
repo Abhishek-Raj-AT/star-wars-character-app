@@ -19,4 +19,7 @@ export interface Vehicle {
 export interface VehicleList {
   list: Vehicle[];
   isLoading: boolean;
+  page: number;
+  total: number;
+  limit: number;
 }

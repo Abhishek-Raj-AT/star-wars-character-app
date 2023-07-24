@@ -17,4 +17,7 @@ export interface Planet {
 export interface PlanetList {
   list: Planet[];
   isLoading: boolean;
+  page: number;
+  total: number;
+  limit: number;
 }

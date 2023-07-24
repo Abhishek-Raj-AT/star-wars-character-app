@@ -1,15 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getSpeciesActions } from "./SpeciesAsyncThunk";
 import { SpeciesList } from "./SpeciesTypes";
+import constant from "../../config/constant";
 
 const initialState: SpeciesList = {
   list: [],
   isLoading: false,
+  page: constant.page.defaultNumber,
+  total: constant.page.defaultTotal,
+  limit: constant.page.size
 };
 const SpeciesSlice = createSlice({
   name: "species",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage(state, action) {
+      state.page = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getSpeciesActions.pending, (state: SpeciesList) => {
@@ -19,7 +27,8 @@ const SpeciesSlice = createSlice({
         getSpeciesActions.fulfilled,
         (state: SpeciesList, { payload }) => {
           if (payload) {
-            state.list = payload;
+            state.list = payload?.data;
+            state.total = payload?.count
           } else {
             state.list = [];
           }
