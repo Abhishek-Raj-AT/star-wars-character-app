@@ -7,11 +7,13 @@ import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { planetAction } from "../../redux/PlanetsSlice";
+import { Link } from "react-router-dom";
 
 const Planets = () => {
   const {list, page, total, limit } = useSelector(
     (state: IRootState) => state.planetStateData
-  );const dispatch = useAppDispatch()
+  );
+  const dispatch = useAppDispatch()
   useEffect(()=>{
     dispatch(getPlanetActions({
       id: constant.defaultUserId,
@@ -39,10 +41,10 @@ const Planets = () => {
         return (
           <div key={id}>
             <ul>
-              <div>
+              <Link to={`/planet/${id}`}>
                 <h4>name:</h4>
                 {planet.name}
-              </div>
+              </Link>
               <div>
                 <h4>diameter:</h4>
                 {planet.diameter}

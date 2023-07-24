@@ -7,6 +7,7 @@ import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { peopleAction } from "../../redux/PeopleSlice";
+import { Link } from "react-router-dom";
 
 const People = () => {
   const { list, page, total, limit } = useSelector(
@@ -46,7 +47,7 @@ const People = () => {
             {list.map((person, id) => {
               return (
                 <ul key={id}>
-                  <p> name:{person.name}</p>
+                  <Link to={`/people/${id}`}> name:{person.name}</Link>
                   <p> height:{person.height}</p>
                   <p> Hair Color:{person.hair_color}</p>
                   <p> Skin color: {person.skin_color}</p>

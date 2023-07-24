@@ -7,6 +7,7 @@ import { setTotalPageCount } from "../../service/ApiHelper";
 import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { starshipAction } from "../../redux/StarshipSlice";
+import { Link } from "react-router-dom";
 
 const StarShips = () => {
   const dispatch = useAppDispatch()
@@ -39,7 +40,7 @@ const StarShips = () => {
       {list.map((starShips,id) => {
         return (
           <ul key={id}>
-            <p>{starShips.name}</p>
+            <Link to={`/starship/${id}`}>{starShips.name}</Link>
             <p>{starShips.model}</p>
             <p>{starShips.starship_class}</p>
             <p>{starShips.manufacturer}</p>

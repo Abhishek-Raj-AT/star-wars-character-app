@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PeoplesList } from "./PeopleType";
-import { getPeopleActions } from "./PeopleAsyncThunk";
+import { getPeopleActions, getIndividualPeopleActions } from "./PeopleAsyncThunk";
 import constant from "../../config/constant";
 
 const initialState: PeoplesList = {
@@ -36,6 +36,23 @@ const PeopleSlice = createSlice({
         }
       )
       .addCase(getPeopleActions.rejected, (state: PeoplesList) => {
+        state.isLoading = false;
+      })
+      .addCase(getIndividualPeopleActions.pending, (state: PeoplesList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getIndividualPeopleActions.fulfilled,
+        (state: PeoplesList, { payload }) => {
+          if (payload) {
+            state.list = payload?.data;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+      .addCase(getIndividualPeopleActions.rejected, (state: PeoplesList) => {
         state.isLoading = false;
       });
   },

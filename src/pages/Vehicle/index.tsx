@@ -7,6 +7,7 @@ import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import Pagination from "../../Components/Pagination";
 import { vehicleAction } from "../../redux/VehicleSlice";
+import { Link } from "react-router-dom";
 
 const Vehicle = () => {
   const dispatch = useAppDispatch();
@@ -46,10 +47,10 @@ const Vehicle = () => {
             {list.map((vehicle, id) => {
               return (
                 <ul key={id}>
-                  <p>
+                  <Link to="/vehicle">
                     <h4>Name:</h4>
                     {vehicle.name}
-                  </p>
+                  </Link>
                   <p>
                     <h4>model:</h4>
                     {vehicle.model}

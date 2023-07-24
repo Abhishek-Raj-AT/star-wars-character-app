@@ -1,5 +1,5 @@
 import constant from "../../config/constant";
-import { getFilmActions } from "./FilmAsyncThunk";
+import { getFilmActions, getIndividualFilmActions } from "./FilmAsyncThunk";
 import { FilmList } from "./FilmType";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -30,6 +30,20 @@ const FilmSlice = createSlice({
         if (payload) {
           state.list = payload?.data
           state.total = payload?.count
+        } else {
+          state.list = [];
+        }
+        state.isLoading = false;
+      })
+      .addCase(getIndividualFilmActions.rejected, (state: FilmList) => {
+        state.isLoading = false;
+      })
+      .addCase(getIndividualFilmActions.pending, (state: FilmList) => {
+        state.isLoading = true;
+      })
+      .addCase(getIndividualFilmActions.fulfilled, (state: FilmList, { payload }) => {
+        if (payload) {
+          state.list = payload?.data
         } else {
           state.list = [];
         }

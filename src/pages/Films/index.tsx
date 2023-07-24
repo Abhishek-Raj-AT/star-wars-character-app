@@ -7,6 +7,7 @@ import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { filmAction } from "../../redux/FilmSlice";
+import { Link } from "react-router-dom";
 
 const Films = () => {
   const { list, page, total, limit } = useSelector(
@@ -16,7 +17,6 @@ const Films = () => {
   useEffect(() => {
     dispatch(
       getFilmActions({
-        id: constant.defaultUserId,
         page,
         size: limit,
       })
@@ -43,12 +43,12 @@ const Films = () => {
           <Loader />
         ) : (
           <div className="filmStyle">
-            {list.map((films, id) => {
+            {list?.map((films, id) => {
               return (
                 <div key={id}>
                   <ul>
                     <li>{films.episode_id}</li>
-                    <li>{films.title}</li>
+                    <Link to={`/films/${films.episode_id}`}>{films.title}</Link>
                     <li>{films.created}</li>
                     <li>{films.director}</li>
                     <li>{films.edited}</li>
