@@ -8,8 +8,6 @@ const initialState: PeoplesList = {
   isLoading: false,
   page: constant.page.defaultNumber,
   total: constant.page.defaultTotal,
-  nextPageUrl: null,
-  prevPageUrl: null,
   limit: constant.page.size,
 };
 const PeopleSlice = createSlice({

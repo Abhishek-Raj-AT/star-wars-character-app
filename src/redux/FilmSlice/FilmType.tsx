@@ -18,7 +18,5 @@ export interface FilmList {
   isLoading: boolean;
   page: number;
   total: number;
-  nextPageUrl: null | string;
-  prevPageUrl: null | string;
   limit: number;
 }

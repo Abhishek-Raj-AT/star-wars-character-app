@@ -20,7 +20,5 @@ export interface SpeciesList {
   isLoading: boolean;
   page: number;
   total: number;
-  nextPageUrl: null | string;
-  prevPageUrl: null | string;
   limit: number;
 }
