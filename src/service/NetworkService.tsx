@@ -10,3 +10,12 @@ const appClient = axios.create({
   headers: defaultHeaders,
 });
 export { appClient };
+
+const imageApiClient = axios.create({
+  baseURL: appConfig.imageUrl,
+  timeout: 40000,
+  headers: {
+    ...defaultHeaders,
+  },
+});
+export default imageApiClient

@@ -7,6 +7,7 @@ const api ={
         species: "species/",
         vehicle: "vehicles/",
         starShip: "starships/",
-    }
+    },
+    imageEndPoint: "v2/list"
 }
 export default api;

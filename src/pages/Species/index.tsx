@@ -8,11 +8,13 @@ import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { speciesAction } from "../../redux/SpeciesSlice";
 import { Link } from "react-router-dom";
+import { getImageActions } from "../../redux/imageSlice/imageAsyncThunk";
 
 const Species = () => {
   const {list,page, total, limit} = useSelector(
     (state: IRootState) => state.speciesStateData
   );
+  const imageList = useSelector((state:IRootState)=>state.imageStateData.list)
   const dispatch = useAppDispatch()
   const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
   const totalPage = setTotalPageCount(total, limit);
@@ -21,6 +23,9 @@ const Species = () => {
       id: constant.defaultUserId,
         page,
         size: limit,
+    }))
+    dispatch(getImageActions({
+      id: constant.defaultUserId
     }))
   },[dispatch, limit, page])
 
@@ -39,8 +44,12 @@ const Species = () => {
     <div>
     {loading ? <Loader/>:<div>
       {list.map((species, id) => {
+        const image  = imageList[id]
         return (
           <ul key={id}>
+            <div>
+              <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
+            </div>
               <h4>Name:</h4>
             <Link to={`/species/${id + 1}`}>
               {species.name}

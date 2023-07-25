@@ -8,6 +8,7 @@ import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { starshipAction } from "../../redux/StarshipSlice";
 import { Link } from "react-router-dom";
+import { getImageActions } from "../../redux/imageSlice/imageAsyncThunk";
 
 const StarShips = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ const StarShips = () => {
   const loading = useSelector(
     (state: IRootState) => state.starShipStateData.isLoading
   );
+  const imageList = useSelector((state:IRootState)=> state.imageStateData.list)
   useEffect(() => {
     dispatch(
       getStarshipActions({
@@ -26,6 +28,9 @@ const StarShips = () => {
         size: limit,
       })
     );
+    dispatch(getImageActions({
+      id: constant.defaultUserId
+    }))
   }, [dispatch, limit, page]);
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
@@ -45,8 +50,12 @@ const StarShips = () => {
         ) : (
           <div>
             {list.map((starShips, id) => {
+              const image = imageList[id]
               return (
                 <ul key={id}>
+                  <div>
+                  <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
+                  </div>
                   <Link to={`/starship/${id + 1}`}>{starShips.name}</Link>
                   <p>{starShips.model}</p>
                   <p>{starShips.starship_class}</p>

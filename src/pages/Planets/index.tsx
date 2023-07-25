@@ -8,12 +8,14 @@ import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { planetAction } from "../../redux/PlanetsSlice";
 import { Link } from "react-router-dom";
+import { getImageActions } from "../../redux/imageSlice/imageAsyncThunk";
 
 const Planets = () => {
   const { list, page, total, limit } = useSelector(
     (state: IRootState) => state.planetStateData
   );
   const dispatch = useAppDispatch();
+  const imageList = useSelector((state:IRootState)=>state.imageStateData.list)
   useEffect(() => {
     dispatch(
       getPlanetActions({
@@ -22,6 +24,9 @@ const Planets = () => {
         size: limit,
       })
     );
+    dispatch(getImageActions({
+      id: constant.defaultUserId
+    }))
   }, [dispatch, limit, page]);
   const totalPage = setTotalPageCount(total, limit);
   const pageChangeHandler = (currentPage: number) => {
@@ -45,8 +50,12 @@ const Planets = () => {
         ) : (
           <div>
             {list.map((planet, id) => {
+              const image = imageList[id]
               return (
                 <div key={id}>
+                  <div>
+                  <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
+                  </div>
                   <ul>
                     <h4>name:</h4>
                     <Link to={`/planet/${id + 1}`}>{planet.name}</Link>

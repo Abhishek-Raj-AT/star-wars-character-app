@@ -8,12 +8,14 @@ import { setTotalPageCount } from "../../service/ApiHelper";
 import Pagination from "../../Components/Pagination";
 import { vehicleAction } from "../../redux/VehicleSlice";
 import { Link } from "react-router-dom";
+import { getImageActions } from "../../redux/imageSlice/imageAsyncThunk";
 
 const Vehicle = () => {
   const dispatch = useAppDispatch();
   const { list, page, total, limit } = useSelector(
     (state: IRootState) => state.vehicleStateData
   );
+  const imageList = useSelector((state: IRootState) => state.imageStateData.list)
   const loading = useSelector(
     (state: IRootState) => state.vehicleStateData.isLoading
   );
@@ -25,6 +27,9 @@ const Vehicle = () => {
         size: limit,
       })
     );
+    dispatch(getImageActions({
+      id: constant.defaultUserId,
+    }))
   }, [dispatch, limit, page]);
   const totalPage = setTotalPageCount(total, limit);
   const pageChangeHandler = (currentPage: number) => {
@@ -45,8 +50,12 @@ const Vehicle = () => {
         ) : (
           <div>
             {list.map((vehicle, id) => {
+              const image = imageList[id]
               return (
                 <ul key={id}>
+                  <div>
+                  <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
+                  </div>
                   <h4>Name:</h4>
                   <Link to={`/vehicle/${id + 1}`}>{vehicle.name}</Link>
                   <p>

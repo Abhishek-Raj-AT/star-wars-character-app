@@ -8,11 +8,13 @@ import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { filmAction } from "../../redux/FilmSlice";
 import { Link } from "react-router-dom";
+import { getImageActions } from "../../redux/imageSlice/imageAsyncThunk";
 
 const Films = () => {
   const { list, page, total, limit } = useSelector(
     (state: IRootState) => state.filmStateData
   );
+  const imageList = useSelector((state:IRootState)=>state.imageStateData.list)
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(
@@ -21,6 +23,9 @@ const Films = () => {
         size: limit,
       })
     );
+    dispatch(getImageActions({
+      id: constant.defaultUserId
+    }))
   }, [dispatch, limit, page]);
   const loading = useSelector(
     (state: IRootState) => state.filmStateData.isLoading
@@ -29,12 +34,7 @@ const Films = () => {
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
     dispatch(filmAction.setCurrentPage(page));
-    dispatch(
-      getFilmActions({
-        page,
-        size: limit,
-      })
-    );
+    
   };
   return (
     <>
@@ -44,11 +44,13 @@ const Films = () => {
         ) : (
           <div className="filmStyle">
             {list?.map((films, id) => {
+              const image = imageList[id];
               return (
                 <div key={id}>
+                   <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
                   <ul>
                     <li>{films.episode_id}</li>
-                    <Link to={`/films/${id + 1} `}>{films.title}</Link>
+                    <Link to={`/films/${id + 1}`}>{films.title}</Link>
                     <li>{films.created}</li>
                     <li>{films.director}</li>
                     <li>{films.edited}</li>
@@ -67,9 +69,7 @@ const Films = () => {
         page={page}
         onPageChangeHandler={pageChangeHandler}
         totalPages={
-          totalPage > 0
-            ? totalPage
-            : constant.page.defaultCurrentPaginationNumber
+          totalPage > 0 ? totalPage : constant.page.defaultCurrentPaginationNumber
         }
       />
     </>
