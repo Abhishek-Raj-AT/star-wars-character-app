@@ -1,35 +1,40 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../../redux/store";
 import { useParams } from "react-router-dom";
-import { getIndividualFilmActions } from "../../../redux/FilmSlice/FilmAsyncThunk";
+import { getFilmActions } from "../../../redux/FilmSlice/FilmAsyncThunk";
 import { useEffect } from "react";
 
 const FilmDetails = () => {
-    const { list } = useSelector((state: IRootState) => state.filmStateData);
-    const { filmId } = useParams();
-    const dispatch = useAppDispatch();
-    const value = Object.values(list)
-    console.log(filmId);
-    console.log("list here", value);
-    useEffect(() => {
-      const id = Number(filmId);
-      dispatch(getIndividualFilmActions({ id }));
-    }, [dispatch, filmId]);
-    return (
-        <>
-      <div>
-        {value?.map((lists) => (
-          <div key={lists.episode_id}>
-            <ul>
-                <li>{lists.title}</li>
-                <li>{lists.characters}</li>
-                <li>{lists.opening_crawl}</li>
-                <li>{lists.director}</li>
-            </ul>
-          </div>
-        ))}
-      </div>
-      </>
+  const { list, page, limit } = useSelector(
+    (state: IRootState) => state.filmStateData
+  );
+  const { filmId } = useParams();
+  const dispatch = useAppDispatch();
+  const values = list[Number.parseInt(filmId!) - 1];
+  useEffect(() => {
+    const id = Number(filmId);
+    dispatch(
+      getFilmActions({
+        id,
+        page,
+        size: limit,
+      })
     );
-  };
-  export default FilmDetails;
+  }, [dispatch, filmId, limit, page]);
+  return (
+    <>
+      <div>
+        <div>{values.title}</div>
+        <div>{values.episode_id}</div>
+        <div>{values.opening_crawl}</div>
+        <div>{values.characters}</div>
+        <div>{values.created}</div>
+        <div>{values.director}</div>
+        <div>{values.producer}</div>
+        <div>{values.release_date}</div>
+        <div>{values.edited}</div>
+      </div>
+    </>
+  );
+};
+export default FilmDetails;

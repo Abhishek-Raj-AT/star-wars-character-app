@@ -47,10 +47,8 @@ const Vehicle = () => {
             {list.map((vehicle, id) => {
               return (
                 <ul key={id}>
-                  <Link to="/vehicle">
-                    <h4>Name:</h4>
-                    {vehicle.name}
-                  </Link>
+                  <h4>Name:</h4>
+                  <Link to={`/vehicle/${id + 1}`}>{vehicle.name}</Link>
                   <p>
                     <h4>model:</h4>
                     {vehicle.model}
@@ -110,10 +108,13 @@ const Vehicle = () => {
         )}
         <Pagination
           page={page}
-          onPageChangeHandler={pageChangeHandler} 
-          totalPages={totalPage > 0
+          onPageChangeHandler={pageChangeHandler}
+          totalPages={
+            totalPage > 0
               ? totalPage
-              : constant.page.defaultCurrentPaginationNumber}/>
+              : constant.page.defaultCurrentPaginationNumber
+          }
+        />
       </div>
     </>
   );

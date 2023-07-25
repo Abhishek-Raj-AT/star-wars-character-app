@@ -1,14 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getIndividualPlanet, getPlanet } from "../../service/PlanetService";
+import { getPlanet } from "../../service/PlanetService";
 import constant from "../../config/constant";
 
 export interface GetPlanetList {
   id?: number;
   page: number
   size: number;
-}
-export interface GetIndividualPlanetList{
-  id: number;
 }
 
 export const getPlanetActions = createAsyncThunk(
@@ -20,25 +17,6 @@ export const getPlanetActions = createAsyncThunk(
         return {
           data: response?.data?.results,
           count: response?.data?.count
-        }
-      } else if (response.status === constant.APIResponse.errorStatusCode) {
-        return response?.data?.message;
-      }
-    } catch (error) {
-      return error;
-    }
-  }
-);
-export const getIndividualPlanetActions = createAsyncThunk(
-  "individualPlanet/getIndividualPlanetActions",
-  async (payload: GetIndividualPlanetList, { dispatch, getState }) => {
-    try {
-      const response = await getIndividualPlanet(payload);
-      if (response.status === constant.APIResponse.defaultStatusCode) {
-        console.log("planet response", response.data);
-        
-        return {
-          data: response?.data?.data,
         }
       } else if (response.status === constant.APIResponse.errorStatusCode) {
         return response?.data?.message;

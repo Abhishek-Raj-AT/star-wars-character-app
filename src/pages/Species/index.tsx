@@ -41,8 +41,8 @@ const Species = () => {
       {list.map((species, id) => {
         return (
           <ul key={id}>
-            <Link to="/species">
               <h4>Name:</h4>
+            <Link to={`/species/${id + 1}`}>
               {species.name}
             </Link>
             <p>

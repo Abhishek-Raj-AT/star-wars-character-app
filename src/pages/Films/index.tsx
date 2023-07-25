@@ -48,7 +48,7 @@ const Films = () => {
                 <div key={id}>
                   <ul>
                     <li>{films.episode_id}</li>
-                    <Link to={`/films/${films.episode_id}`}>{films.title}</Link>
+                    <Link to={`/films/${id + 1} `}>{films.title}</Link>
                     <li>{films.created}</li>
                     <li>{films.director}</li>
                     <li>{films.edited}</li>
@@ -66,9 +66,11 @@ const Films = () => {
       <Pagination
         page={page}
         onPageChangeHandler={pageChangeHandler}
-        totalPages={totalPage > 0
-          ? totalPage
-          : constant.page.defaultCurrentPaginationNumber}
+        totalPages={
+          totalPage > 0
+            ? totalPage
+            : constant.page.defaultCurrentPaginationNumber
+        }
       />
     </>
   );

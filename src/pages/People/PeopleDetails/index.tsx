@@ -1,29 +1,37 @@
-import { useSelector } from "react-redux"
-import { IRootState, useAppDispatch } from "../../../redux/store"
-import { useEffect } from "react"
-import { getIndividualPeopleActions } from "../../../redux/PeopleSlice/PeopleAsyncThunk"
-import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { IRootState, useAppDispatch } from "../../../redux/store";
+import { useEffect } from "react";
+import { getPeopleActions } from "../../../redux/PeopleSlice/PeopleAsyncThunk";
+import { useParams } from "react-router-dom";
 
-const PeopleDetails =()=>{
-    const dispatch = useAppDispatch()
-    const {list} = useSelector((state:IRootState)=>state.peopleStateData)
-    const {peopleId} = useParams()
-    const value = Object.values(list)
-    console.log("value", value)
-    useEffect(() => {
-        const id = Number(peopleId);
-        dispatch(getIndividualPeopleActions({ id }));
-      }, [dispatch, peopleId]);
-    return(
-        <div>
-            {value.map((lists,id)=>{
-                return(
-                    <ul key={id}>
-                        <li>{lists.hair_color}</li>
-                    </ul>
-                )
-            })}
-        </div>
-    )
-}
-export default PeopleDetails
+const PeopleDetails = () => {
+  const dispatch = useAppDispatch();
+  const { list, page, limit } = useSelector(
+    (state: IRootState) => state.peopleStateData
+  );
+  const { peopleId } = useParams();
+  const value = list[Number.parseInt(peopleId!) - 1];
+  useEffect(() => {
+    const id = Number(peopleId);
+    dispatch(
+      getPeopleActions({
+        id,
+        page,
+        size: limit,
+      })
+    );
+  }, [dispatch, limit, page, peopleId]);
+  return (
+    <div>
+      <div>{value.gender}</div>
+      <div>{value.birth_year}</div>
+      <div>{value.eye_color}</div>
+      <div>{value.hair_color}</div>
+      <div>{value.height}</div>
+      <div>{value.homeworld}</div>
+      <div>{value.mass}</div>
+      <div>{value.skin_color}</div>
+    </div>
+  );
+};
+export default PeopleDetails;

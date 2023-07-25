@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PlanetList } from "./PlanetTypes";
-import { getIndividualPlanetActions, getPlanetActions } from "./PlanetAsyncThunk";
+import {  getPlanetActions } from "./PlanetAsyncThunk";
 import constant from "../../config/constant";
 
 const initialState: PlanetList = {
@@ -33,20 +33,6 @@ const PlanetSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getPlanetActions.rejected, (state: PlanetList) => {
-        state.isLoading = false;
-      })
-      .addCase(getIndividualPlanetActions.pending, (state: PlanetList) => {
-        state.isLoading = true;
-      })
-      .addCase(getIndividualPlanetActions.fulfilled, (state: PlanetList, { payload }) => {
-        if (payload) {
-          state.list = payload?.data;
-        } else {
-          state.list = [];
-        }
-        state.isLoading = false;
-      })
-      .addCase(getIndividualPlanetActions.rejected, (state: PlanetList) => {
         state.isLoading = false;
       });
   },

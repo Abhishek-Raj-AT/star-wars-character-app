@@ -47,7 +47,7 @@ const People = () => {
             {list.map((person, id) => {
               return (
                 <ul key={id}>
-                  <Link to={`/people/${id}`}> name:{person.name}</Link>
+                  <Link to={`/people/${id + 1}`}> name:{person.name}</Link>
                   <p> height:{person.height}</p>
                   <p> Hair Color:{person.hair_color}</p>
                   <p> Skin color: {person.skin_color}</p>
