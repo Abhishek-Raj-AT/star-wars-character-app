@@ -8,11 +8,13 @@ import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { peopleAction } from "../../redux/PeopleSlice";
 import { Link } from "react-router-dom";
+import { getImageActions } from "../../redux/imageSlice/imageAsyncThunk";
 
 const People = () => {
   const { list, page, total, limit } = useSelector(
     (state: IRootState) => state.peopleStateData
   );
+  const imageList = useSelector((state: IRootState) => state.imageStateData.list)
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(
@@ -22,6 +24,9 @@ const People = () => {
         size: limit,
       })
     );
+    dispatch(getImageActions({
+      id: constant.defaultUserId
+    }))
   }, [dispatch, limit, page]);
   const totalPage = setTotalPageCount(total, limit);
   const loading = useSelector(
@@ -30,6 +35,9 @@ const People = () => {
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
     dispatch(peopleAction.setCurrentPage(page));
+    list.forEach((film, index) => {
+      dispatch(getImageActions({ id: index }));
+    });
     dispatch(
       getPeopleActions({
         page,
@@ -45,8 +53,12 @@ const People = () => {
         ) : (
           <div>
             {list.map((person, id) => {
+              const image = imageList[id]
               return (
                 <ul key={id}>
+                  <div>
+                  <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
+                  </div>
                   <Link to={`/people/${id + 1}`}> name:{person.name}</Link>
                   <p> height:{person.height}</p>
                   <p> Hair Color:{person.hair_color}</p>

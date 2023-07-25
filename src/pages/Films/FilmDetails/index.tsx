@@ -8,6 +8,7 @@ const FilmDetails = () => {
   const { list, page, limit } = useSelector(
     (state: IRootState) => state.filmStateData
   );
+  
   const { filmId } = useParams();
   const dispatch = useAppDispatch();
   const values = list[Number.parseInt(filmId!) - 1];
@@ -21,6 +22,7 @@ const FilmDetails = () => {
       })
     );
   }, [dispatch, filmId, limit, page]);
+
   return (
     <>
       <div>

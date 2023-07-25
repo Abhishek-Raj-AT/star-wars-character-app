@@ -1,4 +1,4 @@
-import { appClient } from "./NetworkService";
+import imageApiClient, { appClient } from "./NetworkService";
 import apiConfig from "../config/api";
 import { hasError, hasSuccess } from "./ApiHelper";
 import { GetFilmList } from "../redux/FilmSlice/FilmAsyncThunk";
@@ -11,3 +11,4 @@ export async function getFilm(payload: GetFilmList) {
     return hasError(error);
   }
 }
+

@@ -6,6 +6,7 @@ import { peopleReducer } from "./PeopleSlice";
 import { planetReducer } from "./PlanetsSlice";
 import { speciesReducer } from "./SpeciesSlice";
 import { vehicleReducer } from "./VehicleSlice";
+import { imageReducer } from "./imageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     planetStateData: planetReducer,
     speciesStateData: speciesReducer,
     vehicleStateData: vehicleReducer,
+    imageStateData: imageReducer,
   },
 });
 export type IRootState = ReturnType<typeof store.getState>;
