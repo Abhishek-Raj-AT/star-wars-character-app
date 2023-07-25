@@ -34,9 +34,6 @@ const FilmSlice = createSlice({
           state.list = [];
         }
         state.isLoading = false;
-      })
-      .addCase(getFilmActions.rejected, (state: FilmList) => {
-        state.isLoading = false;
       });
   },
 });

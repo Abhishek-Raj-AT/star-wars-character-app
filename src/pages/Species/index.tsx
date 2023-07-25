@@ -7,13 +7,14 @@ import Pagination from "../../Components/Pagination";
 import constant from "../../config/constant";
 import { setTotalPageCount } from "../../service/ApiHelper";
 import { speciesAction } from "../../redux/SpeciesSlice";
+import { Link } from "react-router-dom";
 
 const Species = () => {
   const {list,page, total, limit} = useSelector(
     (state: IRootState) => state.speciesStateData
   );
-  const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
   const dispatch = useAppDispatch()
+  const loading = useSelector((state: IRootState) => state.speciesStateData.isLoading)
   const totalPage = setTotalPageCount(total, limit);
   useEffect(()=>{
     dispatch(getSpeciesActions({
@@ -40,10 +41,10 @@ const Species = () => {
       {list.map((species, id) => {
         return (
           <ul key={id}>
-            <p>
               <h4>Name:</h4>
+            <Link to={`/species/${id + 1}`}>
               {species.name}
-            </p>
+            </Link>
             <p>
               <h4>classification:</h4>
               {species.classification}
