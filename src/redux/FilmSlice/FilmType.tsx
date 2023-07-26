@@ -19,4 +19,5 @@ export interface FilmList {
   page: number;
   total: number;
   limit: number;
+  specificFilm: Film
 }

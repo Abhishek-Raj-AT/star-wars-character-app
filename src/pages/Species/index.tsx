@@ -45,13 +45,14 @@ const Species = () => {
     {loading ? <Loader/>:<div>
       {list.map((species, id) => {
         const image  = imageList[id]
+        const splitId = species?.url?.split("/species/");
         return (
           <ul key={id}>
             <div>
               <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
             </div>
               <h4>Name:</h4>
-            <Link to={`/species/${id + 1}`}>
+            <Link to={`/species/${splitId?.[1]?.replace("/", "")}`}>
               {species.name}
             </Link>
             <p>

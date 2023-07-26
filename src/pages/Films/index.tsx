@@ -45,12 +45,13 @@ const Films = () => {
           <div className="filmStyle">
             {list?.map((films, id) => {
               const image = imageList[id];
+              const splitId = films?.url?.split("/films/");
               return (
                 <div key={id}>
                    <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
                   <ul>
                     <li>{films.episode_id}</li>
-                    <Link to={`/films/${id + 1}`}>{films.title}</Link>
+                    <Link to={`/films/${splitId?.[1]?.replace("/", "")}`}>{films.title}</Link>
                     <li>{films.created}</li>
                     <li>{films.director}</li>
                     <li>{films.edited}</li>

@@ -20,4 +20,5 @@ export interface PlanetList {
   page: number;
   total: number;
   limit: number;
+  specificPlanet: Planet
 }

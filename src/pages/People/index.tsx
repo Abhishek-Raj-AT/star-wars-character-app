@@ -28,6 +28,7 @@ const People = () => {
       id: constant.defaultUserId
     }))
   }, [dispatch, limit, page]);
+  
   const totalPage = setTotalPageCount(total, limit);
   const loading = useSelector(
     (state: IRootState) => state.peopleStateData.isLoading
@@ -51,15 +52,16 @@ const People = () => {
         {loading ? (
           <Loader />
         ) : (
-          <div>
+          <div style={{display: "flex"}}>
             {list.map((person, id) => {
               const image = imageList[id]
+              const splitId = person?.url?.split("/people/");
               return (
                 <ul key={id}>
                   <div>
                   <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
                   </div>
-                  <Link to={`/people/${id + 1}`}> name:{person.name}</Link>
+                  <Link to={`/people/${splitId?.[1]?.replace("/", "")}`}> name:{person.name}</Link>
                   <p> height:{person.height}</p>
                   <p> Hair Color:{person.hair_color}</p>
                   <p> Skin color: {person.skin_color}</p>

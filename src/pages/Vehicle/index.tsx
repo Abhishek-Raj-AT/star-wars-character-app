@@ -51,13 +51,14 @@ const Vehicle = () => {
           <div>
             {list.map((vehicle, id) => {
               const image = imageList[id]
+              const splitId = vehicle?.url?.split("/vehicles/");
               return (
                 <ul key={id}>
                   <div>
                   <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
                   </div>
                   <h4>Name:</h4>
-                  <Link to={`/vehicle/${id + 1}`}>{vehicle.name}</Link>
+                  <Link to={`/vehicle/${splitId?.[1]?.replace("/", "")}`}>{vehicle.name}</Link>
                   <p>
                     <h4>model:</h4>
                     {vehicle.model}

@@ -24,4 +24,5 @@ export interface StarshipList {
   page: number;
   total: number;
   limit: number;
+  specificStarship: Starship
 }

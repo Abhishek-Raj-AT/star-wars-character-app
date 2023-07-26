@@ -1,14 +1,30 @@
 import constant from "../../config/constant";
-import { getFilmActions } from "./FilmAsyncThunk";
+import { getFilmActions, getIndividualFilmActions } from "./FilmAsyncThunk";
 import { FilmList } from "./FilmType";
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialSpecificFilm={
+  title: "",
+  episode_id: constant.defaultUserId,
+  characters: [],
+  created: "",
+  director: "",
+  edited: "",
+  opening_crawl: "",
+  producer: "",
+  release_date: "",
+  url: "",
+  starships: [],
+  species: [],
+  planets: [],
+}
 const initialState: FilmList = {
   list: [],
   isLoading: false,
   page: constant.page.defaultNumber,
   total: constant.page.defaultTotal,
-  limit: constant.page.size
+  limit: constant.page.size,
+  specificFilm: initialSpecificFilm
 };
 const FilmSlice = createSlice({
   name: "Film",
@@ -20,6 +36,9 @@ const FilmSlice = createSlice({
     setCurrentPage(state, action) {
       state.page = action.payload
     },
+    resetSpecificFilm(state) {
+      state.specificFilm = initialSpecificFilm
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -33,6 +52,23 @@ const FilmSlice = createSlice({
         } else {
           state.list = [];
         }
+        state.isLoading = false;
+      })
+      .addCase(getFilmActions.rejected, (state: FilmList) => {
+        state.isLoading = false;
+      })
+      .addCase(getIndividualFilmActions.pending, (state: FilmList) => {
+        state.isLoading = true;
+      })
+      .addCase(getIndividualFilmActions.fulfilled, (state: FilmList, { payload }) => {
+        if (payload) {
+          state.specificFilm = payload?.data
+        } else {
+          state.specificFilm = initialSpecificFilm
+        }
+        state.isLoading = false;
+      })
+      .addCase(getIndividualFilmActions.rejected, (state: FilmList) => {
         state.isLoading = false;
       });
   },

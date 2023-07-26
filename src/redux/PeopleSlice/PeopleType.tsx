@@ -1,4 +1,6 @@
 export interface Peoples {
+  url: string;
+  id: number;
   name: string;
   height: number;
   mass: number;
@@ -13,6 +15,7 @@ export interface Peoples {
 }
 export interface PeoplesList {
   list: Peoples[];
+  specificPerson: Peoples
   isLoading: boolean;
   page: number;
   total: number;

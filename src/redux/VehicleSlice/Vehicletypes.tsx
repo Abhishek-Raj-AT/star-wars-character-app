@@ -22,4 +22,5 @@ export interface VehicleList {
   page: number;
   total: number;
   limit: number;
+  specificVehicle: Vehicle
 }

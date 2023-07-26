@@ -1,29 +1,26 @@
 import { useSelector } from "react-redux"
 import { IRootState, useAppDispatch } from "../../../redux/store"
 import { useEffect } from "react"
-import { getSpeciesActions } from "../../../redux/SpeciesSlice/SpeciesAsyncThunk"
+import { getIndividualSpeciesActions, getSpeciesActions } from "../../../redux/SpeciesSlice/SpeciesAsyncThunk"
 import { useParams } from "react-router-dom"
+import { speciesAction } from "../../../redux/SpeciesSlice"
 
 const SpeciesDetails =()=>{
-    const {list, page, limit} = useSelector((state:IRootState)=>state.speciesStateData)
+    const {specificSpecies} = useSelector((state:IRootState)=>state.speciesStateData)
     const dispatch = useAppDispatch()
     const {speciesId} = useParams()
-    const value = list[Number.parseInt(speciesId!)-1]
     useEffect(()=>{
         const id = Number(speciesId)
-        dispatch(getSpeciesActions({
-            id,
-            page,
-            size: limit
-        }))
-    },[dispatch, limit, page, speciesId])
+        dispatch(getIndividualSpeciesActions({id}))
+        return ()=>{speciesAction.resetSpecificSpecies()}
+    },[dispatch, speciesId])
     return(
         <div>
-            <div>{value.average_height}</div>
-            <div>{value.average_lifespan}</div>
-            <div>{value.classification}</div>
-            <div>{value.created}</div>
-            <div>{value.designation}</div>
+            <div>{specificSpecies.average_height}</div>
+            <div>{specificSpecies.average_lifespan}</div>
+            <div>{specificSpecies.classification}</div>
+            <div>{specificSpecies.created}</div>
+            <div>{specificSpecies.designation}</div>
         </div>
     )
 }

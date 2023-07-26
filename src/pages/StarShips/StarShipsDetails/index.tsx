@@ -1,38 +1,32 @@
 import { useParams } from "react-router-dom";
 import { IRootState, useAppDispatch } from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { getStarshipActions } from "../../../redux/StarshipSlice/StarshipAsyncThunk";
+import { getIndividualStarshipActions, getStarshipActions } from "../../../redux/StarshipSlice/StarshipAsyncThunk";
 import { useEffect } from "react";
 
 const StarShipsDetails = () => {
   const { starshipId } = useParams();
   const dispatch = useAppDispatch();
-  const { list, page, limit } = useSelector(
+  const { specificStarship } = useSelector(
     (state: IRootState) => state.starShipStateData
   );
-  const value = list[Number.parseInt(starshipId!) - 1];
   useEffect(() => {
     const id = Number(starshipId);
-    dispatch(
-      getStarshipActions({
-        id,
-        page,
-        size: limit,
-      })
+    dispatch(getIndividualStarshipActions({id})
     );
-  }, [dispatch, limit, page, starshipId]);
+  }, [dispatch, starshipId]);
 
   return (
     <div>
-      <div>{value.name}</div>
-      <div>{value.MGLT}</div>
-      <div>{value.length}</div>
-      <div>{value.crew}</div>
-      <div>{value.hyperdrive_rating}</div>
-      <div>{value.manufacturer}</div>
-      <div>{value.model}</div>
-      <div>{value.max_atmosphering_speed}</div>
-      <div>{value.consumables}</div>
+      <div>{specificStarship.name}</div>
+      <div>{specificStarship.MGLT}</div>
+      <div>{specificStarship.length}</div>
+      <div>{specificStarship.crew}</div>
+      <div>{specificStarship.hyperdrive_rating}</div>
+      <div>{specificStarship.manufacturer}</div>
+      <div>{specificStarship.model}</div>
+      <div>{specificStarship.max_atmosphering_speed}</div>
+      <div>{specificStarship.consumables}</div>
     </div>
   );
 };

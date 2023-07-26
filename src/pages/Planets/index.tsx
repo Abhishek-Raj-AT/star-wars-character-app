@@ -51,6 +51,7 @@ const Planets = () => {
           <div>
             {list.map((planet, id) => {
               const image = imageList[id]
+              const splitId = planet?.url?.split("/planets/");
               return (
                 <div key={id}>
                   <div>
@@ -58,7 +59,7 @@ const Planets = () => {
                   </div>
                   <ul>
                     <h4>name:</h4>
-                    <Link to={`/planet/${id + 1}`}>{planet.name}</Link>
+                    <Link to={`/planet/${splitId?.[1]?.replace("/", "")}`}>{planet.name}</Link>
                     <div>
                       <h4>diameter:</h4>
                       {planet.diameter}

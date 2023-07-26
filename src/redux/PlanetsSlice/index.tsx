@@ -1,14 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PlanetList } from "./PlanetTypes";
-import {  getPlanetActions } from "./PlanetAsyncThunk";
+import {  getIndividualPlanetActions, getPlanetActions } from "./PlanetAsyncThunk";
 import constant from "../../config/constant";
-
+const initialSpecificPlanet ={
+  name: "",
+  diameter: "",
+  rotation_period: "",
+  orbital_period: "",
+  gravity: "",
+  population: "",
+  climate: "",
+  terrain: "",
+  surface_water: "",
+  residents: [],
+  films: [],
+  url: "",
+  created: "",
+  edited: "",
+}
 const initialState: PlanetList = {
   list: [],
   isLoading: false,
   page: constant.page.defaultNumber,
   total: constant.page.defaultTotal,
-  limit: constant.page.size
+  limit: constant.page.size,
+  specificPlanet: initialSpecificPlanet
 };
 const PlanetSlice = createSlice({
   name: "Film",
@@ -16,6 +32,9 @@ const PlanetSlice = createSlice({
   reducers: {
     setCurrentPage(state, action) {
       state.page = action.payload
+    },
+    resetSpecificPlanet(state){
+      state.specificPlanet = initialSpecificPlanet
     }
   },
   extraReducers: (builder) => {
@@ -33,6 +52,20 @@ const PlanetSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getPlanetActions.rejected, (state: PlanetList) => {
+        state.isLoading = false;
+      })
+      .addCase(getIndividualPlanetActions.pending, (state: PlanetList) => {
+        state.isLoading = true;
+      })
+      .addCase(getIndividualPlanetActions.fulfilled, (state: PlanetList, { payload }) => {
+        if (payload) {
+          state.specificPlanet = payload?.data;
+        } else {
+          state.specificPlanet = initialSpecificPlanet;
+        }
+        state.isLoading = false;
+      })
+      .addCase(getIndividualPlanetActions.rejected, (state: PlanetList) => {
         state.isLoading = false;
       });
   },
