@@ -1,40 +1,35 @@
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../../redux/store";
 import { useParams } from "react-router-dom";
-import { getFilmActions } from "../../../redux/FilmSlice/FilmAsyncThunk";
+import {  getIndividualFilmActions } from "../../../redux/FilmSlice/FilmAsyncThunk";
 import { useEffect } from "react";
 
 const FilmDetails = () => {
-  const { list, page, limit } = useSelector(
+  const { specificFilm } = useSelector(
     (state: IRootState) => state.filmStateData
   );
   
   const { filmId } = useParams();
   const dispatch = useAppDispatch();
-  const values = list[Number.parseInt(filmId!) - 1];
   useEffect(() => {
     const id = Number(filmId);
     dispatch(
-      getFilmActions({
-        id,
-        page,
-        size: limit,
-      })
+      getIndividualFilmActions({id})
     );
-  }, [dispatch, filmId, limit, page]);
+  }, [dispatch, filmId]);
 
   return (
     <>
       <div>
-        <div>{values.title}</div>
-        <div>{values.episode_id}</div>
-        <div>{values.opening_crawl}</div>
-        <div>{values.characters}</div>
-        <div>{values.created}</div>
-        <div>{values.director}</div>
-        <div>{values.producer}</div>
-        <div>{values.release_date}</div>
-        <div>{values.edited}</div>
+        <div>{specificFilm.title}</div>
+        <div>{specificFilm.episode_id}</div>
+        <div>{specificFilm.opening_crawl}</div>
+        <div>{specificFilm.characters}</div>
+        <div>{specificFilm.created}</div>
+        <div>{specificFilm.director}</div>
+        <div>{specificFilm.producer}</div>
+        <div>{specificFilm.release_date}</div>
+        <div>{specificFilm.edited}</div>
       </div>
     </>
   );

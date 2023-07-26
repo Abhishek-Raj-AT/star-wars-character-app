@@ -1,14 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PeoplesList } from "./PeopleType";
-import { getPeopleActions } from "./PeopleAsyncThunk";
+import { getIndividualPeopleActions, getPeopleActions } from "./PeopleAsyncThunk";
 import constant from "../../config/constant";
 
+const initialSpecificPerson = {
+    url: "",
+    id: 0,
+    name: "",
+    height: 0,
+    mass: 0,
+    hair_color: "",
+    skin_color: "",
+    eye_color: "",
+    birth_year: "",
+    gender: "",
+    homeworld: "",
+    films: [],
+    species: []
+}
 const initialState: PeoplesList = {
   list: [],
   isLoading: false,
   page: constant.page.defaultNumber,
   total: constant.page.defaultTotal,
   limit: constant.page.size,
+  specificPerson: initialSpecificPerson
 };
 const PeopleSlice = createSlice({
   name: "people",
@@ -17,6 +33,9 @@ const PeopleSlice = createSlice({
     setCurrentPage(state, action) {
       state.page = action.payload
     },
+    resetSpecificPerson(state) {
+      state.specificPerson = initialSpecificPerson
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -36,6 +55,23 @@ const PeopleSlice = createSlice({
         }
       )
       .addCase(getPeopleActions.rejected, (state: PeoplesList) => {
+        state.isLoading = false;
+      })
+      .addCase(getIndividualPeopleActions.pending, (state: PeoplesList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getIndividualPeopleActions.fulfilled,
+        (state: PeoplesList, { payload }) => {
+          if (payload) {
+            state.specificPerson = payload?.data;
+          } else {
+            state.specificPerson = initialSpecificPerson
+          }
+          state.isLoading = false;
+        }
+      )
+      .addCase(getIndividualPeopleActions.rejected, (state: PeoplesList) => {
         state.isLoading = false;
       });
   },

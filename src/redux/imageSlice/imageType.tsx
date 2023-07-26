@@ -9,5 +9,4 @@ export interface Images{
 export interface ImageList{
     list: Images[]
     loading: boolean;
-    
 }

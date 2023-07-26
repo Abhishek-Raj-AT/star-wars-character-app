@@ -51,12 +51,13 @@ const StarShips = () => {
           <div>
             {list.map((starShips, id) => {
               const image = imageList[id]
+              const splitId = starShips?.url?.split("/starships/");
               return (
                 <ul key={id}>
                   <div>
                   <img style={{height: "200px"}} src={image?.download_url} alt={image?.author} />
                   </div>
-                  <Link to={`/starship/${id + 1}`}>{starShips.name}</Link>
+                  <Link to={`/starship/${splitId?.[1]?.replace("/", "")}`}>{starShips.name}</Link>
                   <p>{starShips.model}</p>
                   <p>{starShips.starship_class}</p>
                   <p>{starShips.manufacturer}</p>

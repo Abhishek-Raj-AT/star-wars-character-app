@@ -21,4 +21,5 @@ export interface SpeciesList {
   page: number;
   total: number;
   limit: number;
+  specificSpecies: Species
 }
